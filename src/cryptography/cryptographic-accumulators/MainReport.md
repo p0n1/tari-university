@@ -1,139 +1,195 @@
 # Cryptographic Accumulators : A Distilled Introduction
 
+- [Background](#background)
+- [Definitions](#definitions)
+  - [One-way Hash Functions](#one-way-hash-functions)
+  - [Quasi-commutative Functions](#quasi-commutative-function)
+  - [One-way Accumulator](#one-way-accumulator)
+  - [Accumulator Scheme](#accumulator-scheme)
+- [The RSA Accumulator](#the-rsa-accumulator)
+  - [Membership Proof](#membership-proof)
+  - [Non-membership Proof](#non-membership-proof)
+  - [Adding An Element](#adding-an-element)
+  - [Removing An Element](#removing-an-element)
+- [Conclusion](#conclusion)  
+- [References](#references)
+- [Contributors](#contributors)
+
 ## Background
 
-The concept of Cryptographic accumulators were first introduced by Benaloh and de Mare, which was then further developed and formalized by Barić and Pfitzmann. This became known as the RSA accumulator. Nguyen also contributed a new kind of accumulator (bilinear-map accumulators) which is based on elliptic curves and not modular exponentiation.
+The concept of Cryptographic accumulators were first introduced by Benaloh and de Mare, which was then further developed
+and formalized by Barić and Pfitzmann. This became known as the RSA accumulator. Nguyen also contributed a new kind of
+accumulator (bilinear-map accumulators) which is based on elliptic curves and not modular exponentiation.
 
 An accumulator is a one way hash function which works on a set. It takes a set of values
-\(\{x_1,x_2,..., x_n\}\)
-and accumulates it into a single constant value  of constant size \(z\). This is then used to verify if a value was a member of the original set or not, without revealing the original set, via a membership or non-membership proof.
+$ \lbrace x_1,x_2,..., x_n \rbrace $ and accumulates it into a single constant value  of constant size (z). This is
+then used to verify if a value was a member of the original set or not, without revealing the original set, via a
+membership or non-membership proof.
 
-An accumulator which only accumulates a finite set of values without allowing addition of new values or deletions of existing values is called a static accumulator. An accumulator which allows additions and deletions of values is called a dynamic accumulator. A universal accumulator is a dynamic accumulator which allows both membership and non-membership proofs. Both RSA based and Elliptic Curve based accumulators have both static and dynamic constructions. The RSA accumulator will be explored here.
-
-Accumulators are related to a number of other cryptographic data structures like Merkle Trees and Bloom Filters. The primary difference between Merkle Trees and Accumulators is that in the former the position of the element is important whereas in the latter the order is irrelevant. The primary difference between Bloom Filters and Accumulators is that while both can say for certain that a value is not in a set, only the Accumulator can say for certain that a value is in a set due to their being false positives with Bloom Filters.
+An accumulator which only accumulates a finite set of values without allowing addition of new values or deletions of
+existing values is called a static accumulator. An accumulator which allows additions and deletions of values is called
+a dynamic accumulator. A universal accumulator is a dynamic accumulator which allows both membership and non-membership
+proofs. Both RSA based and Elliptic Curve based accumulators have both static and dynamic constructions. The RSA
+accumulator will be explored here.
 
 ## Definitions
-###One-way hash functions
-A one-way hash function family \(\{\mathcal{H}_\lambda\}_{\lambda\in N}\) is defined such that
-\[
-\ \mathcal{H}_\lambda = \{\mathit{h}_k : X_k \times Y_k \rightarrow Z_k\}; \lambda \in N, \mathit{h}_k \in \mathcal{H}_\lambda\
-\]
-\[
-\begin{multline}
-\shoveright
-\begin{aligned}
-(1)
-\end{aligned}
-\end{multline}
-\]
 
+### One-way Hash Functions
+
+A one-way hash function family $ \lbrace \mathcal{H}\_\lambda \rbrace \_{\lambda\in N} $ is defined such that
+$$
+\ \mathcal{H}\_\lambda = {\mathit{h}\_k : X_k \times Y\_k \rightarrow Z\_k}; \lambda \in N,
+\mathit{h}\_k \in  \mathcal{H}\_\lambda \mspace{100mu} (1)
+$$
 and is assumed to also possess the properties of strong one-way hash functions.
 
-###Quasi-commutative function
-A quasi-commutative function is defined such that for
-\(\mathit{f}:X \times Y \rightarrow X\)
-\[
-\ (\forall x \in X)\;(\forall y_1,y_2 \in Y)\;[\;\mathit{f}\;(\mathit{f\;(x,y_1),y_2}) = \mathit{f}\;(\mathit{f\;(x,y_2),y_1})\;]
-\]
-\[
-\begin{multline}
-\shoveright
-\begin{aligned}
-(2)
-\end{aligned}
-\end{multline}
-\]
+### Quasi-commutative Function
 
-###One-way Accumulator
+A quasi-commutative function is defined such that for $ \mathit{f} : X \times Y \rightarrow X $
+$$
+\ (\forall x \in X)(\forall y\_1,y\_2 \in Y)[\mathit{f}(\mathit{f(x,y\_1),y\_2}) =
+\mathit{f}(\mathit{f(x,y\_2),y\_1})] \mspace{100mu} (2)
+$$
+
+### One-way Accumulator
+
 Should a quasi-commutative function also be a one-way hash function, then it is a one-way accumulator.
 
-###Accumulator Scheme
+### Accumulator Scheme
+
 For a static accumulator, the accumulator scheme is an ordered list of four algorithms.
 
-* Gen is the key generation algorithm. Gen takes as input a security parameter \(1^\lambda\) and an accumulation threshold (\(\mathcal{N}\)) and returns an accumulator key (\(\mathcal{k}\)) from the key space
-\(\mathcal{K}_{\lambda,N}\)
-
-* Eval is the evaluation algorithm used to accumulate a set
-\(\mathcal{L} = \{y_1,..,y_{n\text{'}}\} \;\text{of}\;\mathcal{N}^\text{'}\leq \;\mathcal{N}\) from domain \(Y_k\), where \(\mathcal{k}\in\mathcal{K}_{\lambda,N}\). It takes (\(\mathcal{k}_\lambda,\mathcal{L}\)) and returns (\(\mathcal{z}\in Z_k,aux\)\), where \(\mathcal{z}\) is the accumulator. Note that while the auxiliary information may differ, the accumulated value will be the same on the same input.
-
-* Wit is the witness extraction algorithm. It takes an accumulator key \(k\in\mathcal{K}_{\lambda,N}\), a value \(y_i \in Y_k\), the auxiliary information generated by Eval, as well as the accumulator \(\mathcal{z}\). It returns \(\overline{w_i}\) which proves \(\mathcal{y_i}\) was accumulated within \(\mathcal{z}\), otherwise it returns \(\bot\).
-
-* Ver is the verification algorithm. It's input is the accumulator key \(\mathcal{k}\), a value \(\mathcal{y_i}\), a witness \(\overline{w_i}\) and the accumulator \(\mathcal{z}\). It returns a boolean value according to whether the witness is a valid proof of \(\mathcal{y_i}\) being accumulated within \(\mathcal{z}\), namely \(\mathcal{h_k(w_i,y_i)}\stackrel{?}{=}\mathcal{z}\).
+- Gen is the key generation algorithm. Gen takes as input a security parameter $ (1^\lambda) $ and an accumulation
+threshold $ (\mathcal{N}) $ and returns an accumulator key $ (\mathcal{k}) $ from the key space
+$ (\mathcal{K}\_{\lambda,N}) $
+- Eval is the evaluation algorithm used to accumulate a set $ \mathcal{L} = \lbrace y\_1,..,y\_{n\text{'}} \rbrace
+\text{of} \mathcal{N}^\text{'}\leq \;\mathcal{N} $ from domain $ (Y\_k) $, where
+$ \mathcal{k}\in\mathcal{K}\_{\lambda,N} $. It takes $ (\mathcal{k}\_\lambda,\mathcal{L}) $ and returns
+$ (\mathcal{z}\in Z\_k,aux) $, where $ \mathcal{z} $ is the accumulator. Note that while the auxiliary information may
+differ, the accumulated value will be the same on the same input.
+- Wit is the witness extraction algorithm. It takes an accumulator key $ k\in\mathcal{K}\_{\lambda,N} $, a value
+$ y_i \in Y\_k $, the auxiliary information generated by Eval, as well as the accumulator $ \mathcal{z} $. It returns
+$ \overline{w\_i} $ which proves $ \mathcal{y\_i} $ was accumulated within $ \mathcal{z} $, otherwise it returns
+$ \bot $.
+- Ver is the verification algorithm. It's input is the accumulator key $ \mathcal{k} $, a value $ \mathcal{y\_i} $, a
+witness $ \overline{w\_i} $ and the accumulator $ \mathcal{z} $. It returns a boolean value according to whether the
+witness is a valid proof of $ \mathcal{y_i} $ being accumulated within $ \mathcal{z} $, namely
+$ \mathcal{h\_k(w\_i,y\_i)}\stackrel{?}{=}\mathcal{z} $.
 
 For a dynamic accumulator, it is the previous ordered list of four algorithms plus an additional three.
 
-* Add is the element addition algorithm. It takes an accumulator key \(\mathcal{k}\), a value \(\mathcal{z}\in Z_k\) (the accumulation of \(\mathcal{L}\) of less than \(\mathcal{N}\) elements in \(Y_k\) ) and another value \(y'\in Y_k\). It returns a new accumulator \(\mathcal{z'}\) corresponding to \(\mathcal{L}\cup \{y'\}\), a witness \(\overline{\mathcal{w'}}\in W_k\) and some auxiliary information (\(\mathcal{aux_{Add}}\)).
-
-* Del is the element deletion algorithm. It takes an accumulator key \(\mathcal{k}\), a value \(\mathcal{z}\in Z\) (the accumulation of \(\mathcal{L}\) of elements in \(Y_k\) ) and an element \(\mathcal{y'}\in \mathcal{L}\). It returns a new accumulator \(\mathcal{z'}\) corresponding to \(\mathcal{L}\backslash\{y'\}\) and some auxiliary information (\(\mathcal{aux_{Del}}\)).
-
-* Upd is the witness update algorithm. It takes an accumulator key (\(\mathcal{k}\)), a value \(\mathcal{y}\in Y_k\), a witness \(\overline{\mathcal{w}}\in W_k\), an operation \(\mathcal{b}\) (either Add or Del) and the auxiliary data \(\mathcal{aux_{op}}\) corresponding to \(\mathcal{b}\). It returns an updates witness \(\overline{\mathcal{w'}}\) that proves the presence of \(\mathcal{y}\) within the updated accumulator \(\mathcal{z'}\).
+- Add is the element addition algorithm. It takes an accumulator key $ \mathcal{k} $, a value $ \mathcal{z}\in Z\_k $
+(the accumulation of $ \mathcal{L} $ of less than $ \mathcal{N} $ elements in $ Y\_k $ and another value $ y'\in Y\_k $.
+It returns a new accumulator $ \mathcal{z'} $ corresponding to $ \mathcal{L}\cup \{y'\} $, a witness
+$ \overline{\mathcal{w'}}\in W\_k $ and some auxiliary information $ \mathcal{aux\_{Add}} $.
+- Del is the element deletion algorithm. It takes an accumulator key $ \mathcal{k} $, a value $ \mathcal{z}\in Z $
+(the accumulation of $ \mathcal{L} $ of elements in $ Y\_k $ ) and an element $ \mathcal{y'}\in \mathcal{L} $. It
+returns a new accumulator $ \mathcal{z'} $ corresponding to $ \mathcal{L}\backslash \ \lbrace y'\rbrace $ and some
+auxiliary information $ \mathcal{aux\_{Del}} $.
+- Upd is the witness update algorithm. It takes an accumulator key $ \mathcal{k} $, a value $ \mathcal{y}\in Y\_k $, a
+witness $ \overline{\mathcal{w}}\in W\_k $, an operation $ \mathcal{b} $ (either Add or Del) and the auxiliary data
+$ \mathcal{aux_{op}} $ corresponding to $ \mathcal{b} $. It returns an updates witness $ \overline{\mathcal{w'}} $
+that proves the presence of $ \mathcal{y} $ within the updated accumulator $ \mathcal{z'} $.
 
 These are assumed to be constructed to be both trapdoor-less and collision-free accumulator schemes.
 
-###The RSA Accumulator
+## The RSA Accumulator
 
 The RSA accumulator works on modular exponentiation.
 
-We have a random generator \(\mathcal{g}\). An RSA group with modulus \(\mathcal{N}\). A set \(\mathcal{S}\). A function \(\mathcal{HashPrime}\) which hashes values into odd primes. \(\mathcal{S_P}\) is the set of hashing all elements of the set \(\mathcal{S}\) and \(\mathcal{P_s}\) is the product of all primes in \(\mathcal{S_P}\).
+We have a random generator $ \mathcal{g} $. An RSA group with modulus $ \mathcal{N} $. A set $ \mathcal{S} $. A
+function $ \mathcal{HashPrime} $ which hashes values into odd primes. $ \mathcal{S\_P} $ is the set of hashing all
+elements of the set $ \mathcal{S} $ and $ \mathcal{P_s} $ is the product of all primes in $ \mathcal{S\_P} $.
 
-The value of the accumulator (the commitment to \(\mathcal{S}\)) is then:
-\[
-\mathcal{z} = \mathcal{g}^{P_s} \!\!\!\!\!\!\mod \mathcal{N}
-\]
+The value of the accumulator (the commitment to $ \mathcal{S} $ is then:
+$$
+\mathcal{z} = \mathcal{g}^{P\_s} \kern-1em\mod \mathcal{N}
+$$
 
-######Membership Proof
-For any \(\mathcal{x}\) element in \(\mathcal{S}\) and \(\mathcal{p_x}\) is \(\mathcal{HashPrime(x)}\) for the corresponding element in \(\mathcal{P_s}\).
- The membership proof of element \(\mathcal{x}\) (the witness \(\mathcal{\overline{w_x}}\)) is given by
-\[
-\mathcal{\overline{w_x}} = \mathcal{g}^{P_s/P_x} \!\!\!\!\!\!\mod \mathcal{N}
-\]
+### Membership Proof
 
-Membership of \(\mathcal{x}\) can be verified against commitment \(\mathcal{z}\) by
+For any $ \mathcal{x} $ element in $ \mathcal{S} $ and $ \mathcal{p_x} $ is $ \mathcal{HashPrime(x)} $ for the
+corresponding element in $ \mathcal{P_s} $.
+ The membership proof of element $ \mathcal{x} $ (the witness $ \mathcal{\overline{w\_x}} $ ) is given by
+$$
+\mathcal{\overline{w\_x}} = \mathcal{g}^{P\_s/P\_x} \kern-1em\mod \mathcal{N}
+$$
 
-\[
-\mathcal{\overline{w_x}}^{P_x} \!\!\!\!\!\!\mod \mathcal{N} = (\mathcal{g}^{P_s/P_x})^{P_x} \!\!\!\!\!\!\mod \mathcal{N} = \mathcal{g}^{P_s} \!\!\!\!\!\!\mod \mathcal{N} = \mathcal{z}
-\]
 
-######Non-Membership Proof
-If we calculate the Bezout coefficients \(\mathcal{a,b}\) such that \(\mathcal{aP_y} + \mathcal{bP_s}=1\) the non-membership witness \(\mathcal{\overline{U_y}}\) for \(\mathcal{y}\) is pair \((\mathcal{g^a,b})\).
+Membership of $ \mathcal{x} $ can be verified against commitment $ \mathcal{z} $ by
+$$
+\mathcal{\overline{w\_x}}^{P\_x} \kern-1em\mod \mathcal{N} = (\mathcal{g}^{P\_s/P\_x})^{P\_x} \kern-1em\mod
+\mathcal{N} = \mathcal{g}^{P\_s} \kern-1em\mod \mathcal{N} = \mathcal{z}
+$$
 
-To verify \(\mathcal{y}\) is not part of the accumulated set, using \(\mathcal{\overline{U_y}} = (\mathcal{d},\mathcal{b})\), check that
-\[
-\mathcal{d}^{P_y}\mathcal{z^b} = \mathcal{g}^{a{P_y}}\mathcal{g^{b{P_s}}} =  
-\mathcal{g^{aP_y+bP_s}} = \mathcal{g}
-\]
+### Non-Membership Proof
 
-######Adding an element
-Adding \(\mathcal{x}\) to the accumulator \(\mathcal{z}\) with \(\mathcal{\overline{w_x}}\) being the current witness for set \(\mathcal{S}\) then
-\[
-\mathcal{\overline{{W_x}'}} = \mathcal{\overline{W_x}}^\mathcal{P_x} \!\!\!\!\!\!\mod \mathcal{N}
-\]
-\[
-\mathcal{{z}'} = \mathcal{z}^\mathcal{P_x} \!\!\!\!\!\!\mod \mathcal{N}
-\]
+If we calculate the Bezout coefficients $ \mathcal{a,b} $ such that $ \mathcal{aP\_y} + \mathcal{bP\_s}=1 $ the
+non-membership witness $ \mathcal{\overline{U\_y}} $ for $ \mathcal{y} $ is pair $ (\mathcal{g^a,b}) $.
+
+To verify $ \mathcal{y} $ is not part of the accumulated set, using $ \mathcal{\overline{U\_y}} =
+(\mathcal{d},\mathcal{b}) $, check that
+$$
+\mathcal{d}^{P_y}\mathcal{z^b} = \mathcal{g}^{a{P\_y}}\mathcal{g^{b{P\_s}}} =  \mathcal{g^{aP\_y+bP\_s}} = \mathcal{g}
+$$
+
+### Adding An Element
+
+Adding $ \mathcal{x} $ to the accumulator $ \mathcal{z} $ with $ \mathcal{\overline{w\_x}} $ being the current witness
+for set $ \mathcal{S} $ then
+$$
+\mathcal{\overline{{W\_x}'}} = \mathcal{\overline{W\_x}}^\mathcal{P\_x} \kern-1em\mod \mathcal{N}
+$$
+
+$$
+\mathcal{{z}'} = \mathcal{z}^\mathcal{P\_x} \kern-1em\mod \mathcal{N}
+$$
+
 Such that
-\[
-\mathcal{\overline{{W_x}'}} \!\!\!\!\!\!\mod \mathcal{N} = \mathcal{W_x}^{P_x} \!\!\!\!\!\!\mod \mathcal{N} = \mathcal{z}^{P_x} \!\!\!\!\!\!\mod \mathcal{N} = \mathcal{{z}'}
-\]
+$$
+\mathcal{\overline{{W\_x}'}} \kern-1em\mod \mathcal{N} = \mathcal{W\_x}^{P\_x} \kern-1em\mod \mathcal{N} =
+\mathcal{z}^{P\_x} \kern-1em\mod \mathcal{N} = \mathcal{{z}'}
+$$
 
-######Removing an element
-Removing \(\mathcal{x}\) from the accumulator \(\mathcal{z}\) with \(\mathcal{\overline{w_x}}\) being the current witness for set \(\mathcal{S}\) then
-\[
-\mathcal{\overline{{W_x}'}} = \mathcal{\overline{W_x}}^\mathcal{1/P_x} \!\!\!\!\!\!\mod \mathcal{N}
-\]
-\[
-\mathcal{{z}'} = \mathcal{z}^\mathcal{1/P_x} \!\!\!\!\!\!\mod \mathcal{N}
-\]
+### Removing An Element
+
+Removing $ \mathcal{x} $ from the accumulator $ \mathcal{z} $ with $ \mathcal{\overline{w\_x}} $ being the current
+witness for set \(\mathcal{S}\) then
+$$
+\mathcal{\overline{{W\_x}'}} = \mathcal{\overline{W\_x}}^\mathcal{1/P\_x} \kern-1em\mod \mathcal{N}
+$$
+
+$$
+\mathcal{{z}'} = \mathcal{z}^\mathcal{1/P\_x} \kern-1em\mod \mathcal{N}
+$$
+
 Such that
-\[
-\mathcal{\overline{{W_x}'}} \!\!\!\!\!\!\mod \mathcal{N} = \mathcal{W_x}^{1/P_x} \!\!\!\!\!\!\mod \mathcal{N} = \mathcal{z}^{1/P_x} \!\!\!\!\!\!\mod \mathcal{N} = \mathcal{{z}'}
-\]
+$$
+\mathcal{\overline{{W\_x}'}} \kern-1em\mod \mathcal{N} = \mathcal{W\_x}^{1/P\_x} \kern-1em\mod \mathcal{N} =
+\mathcal{z}^{1/P\_x} \kern-1em\mod \mathcal{N} = \mathcal{{z}'}
+$$
+
+## Conclusion
+
+Accumulators are related to a number of other cryptographic data structures like Merkle Trees and Bloom Filters. The
+primary difference between Merkle Trees and Accumulators is that in the former the position of the element is important
+whereas in the latter the order is irrelevant. The primary difference between Bloom Filters and Accumulators is that
+while both can say for certain that a value is not in a set, only the Accumulator can say for certain that a value is
+in a set due to their being false positives with Bloom Filters.
+
+Since many families of hash functions could satisfy the quasi-commutative property, they can be applied to a number of
+different hash functions. Since the original set is not revealed by the accumlator they can be used to build various
+zero-knowledge proof systems. The drawback, however, is that due to the original set being lost due to the nature of a
+one-way hash function, when using the accumulator itself you would need to trust that the original set (including
+  subsequent updates in the dynamic accumulator case) was correct when constructing the accumulator itself.
 
 ## References
-[Cryptographic Accumulators:  Definitions,Constructions and Applications](https://cs.nyu.edu/~fazio/research/publications/accumulators.pdf) Date accessed: 2019&#8209;25&#8209;09.
 
-[Introduction to SPV, Merkle Trees and Bloom Filters](https://tlu.tarilabs.com/protocols/merkle-trees-and-spv-1/sources/PITCHME.link.html) Date accessed: 2019&#8209;25&#8209;09.
+[Cryptographic Accumulators:  Definitions,Constructions and Applications](https://cs.nyu.edu/~fazio/research/publications/accumulators.pdf)
+Date accessed: 2019&#8209;09&#8209;25.
 
+[Introduction to SPV, Merkle Trees and Bloom Filters](https://tlu.tarilabs.com/protocols/merkle-trees-and-spv-1/sources/PITCHME.link.html)
+Date accessed: 2019&#8209;09&#8209;25.
 
 ## Contributors
-- <https://github.com/StriderDM>
+- [https://github.com/StriderDM](https://github.com/StriderDM)
