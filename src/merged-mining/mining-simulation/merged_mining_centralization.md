@@ -158,7 +158,7 @@ Is the block time affected by sudden increase in hash rate. This is a dynamic pr
 
 Bitcoin is a digital currency which was introduced in 2009. Its security is based on a proof of work, and a transaction is only considered valid once the system obtains proof that a sufficient amount of computational work has been exerted by authorising nodes. The miners constantly try to solve cryptographic puzzles puzzles in the form of a hash computation. The process of adding a new block to the blockchain is called mining and these blocks contain a set of transactions. The average time to create a new block in blockchain is ten minutes. Two types of agents participate in the Bitcoin network: miners, who validate transactions and clients, who trade in currency. The blockchain is a shared data structure responsible for storing all transaction history. The blocks are connected with each other in the form of a chain. The first block of the chain is known as Genesis. Each block consists of a Block Header, Transaction Counter and Transaction. 
 
-Each block in the chain is identified by a hash in the header. The hash is unique and generated bu the Secure Hash Algorithm (SHA-256). SHA takes any size plaintext and calculates a fixed size 256-bit cryptographic hash. Each header contains the address of the previous block in the chain. The process of adding blocks in the blockchain is called "mining of blocks". If miners mine a valid block 
+Each block in the chain is identified by a hash in the header. The hash is unique and generated bu the Secure Hash Algorithm (SHA-256). SHA takes any size plaintext and calculates a fixed size 256-bit cryptographic hash. Each header contains the address of the previous block in the chain. The process of adding blocks in the blockchain is called "mining of blocks". If miners mine a valid block, it publishes the blocks and extends the blockchain by a new block. The creator of the block is rewarded with the bitcoin. 
 
 
 ### Mining 
@@ -169,3 +169,8 @@ Bitcoin is a decentralized cryptocurrency payment system, working without a sing
 
 Electricity is a semi-renewable resource, depending on the type of resource used for its production. Nevertheless, electricity plays an essential role in the bitcoin mining process since the whole mining process is based on it. The electricity consumed by the mining system is directly proportional to the computational power of that system. Moreover, powerful computers that specially designed fro bitcoin mining process, consumes much more electricity than the regular computers. 
 
+Electricity, one of the necessities of the human beings, can be considered as both renewables if it generates from the renewable resource for example solar energy or hydropower or water plants and non-renewable if it produced from the thermal power plant that uses the coal - a non-renewable resource. So, depending on renewable or non-renewable resources, chosen for production of electricity, it can also be considered as semi-renewable which means that it has a combined fraction of both means of electricity production. 
+
+### Selfish Mining 
+
+### Eclipse Mining 
