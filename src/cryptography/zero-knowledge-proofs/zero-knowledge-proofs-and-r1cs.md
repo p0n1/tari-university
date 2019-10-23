@@ -2,7 +2,7 @@
 
 
 
-Fast and efficient transaction validation is one the main reasons for Layer 2 Scaling, especially for blockchains using confidential transactions. Rank-1 Constraint Systems (R1CS) are used to achieve faster zero-knowledge proofs, particularly in zk-SNARKs and Bulletproofs. 
+Fast and efficient transaction validation is one of the main reasons for Layer 2 Scaling, especially for blockchains using confidential transactions. Rank-1 Constraint Systems (R1CS) are used to achieve faster zero-knowledge proofs, particularly in zk-SNARKs and Bulletproofs. 
 
 
 
@@ -10,11 +10,11 @@ An R1CS is “basically a language for arithmetic circuits with bilinear gates�
 
 
 
-***Tentatively***, the report will be split into two part; 
+***Tentatively***, the report will be split into two parts; 
 
-​	PART I	: ** R1CS in zk-SNARKs ** 
+​	PART I	: **R1CS in zk-SNARKs** 
 
-​	PART II	: ** R1CS in Bulletproofs **
+​	PART II	: **R1CS in Bulletproofs**
 
   
 
