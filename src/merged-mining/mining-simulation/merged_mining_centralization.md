@@ -90,9 +90,9 @@ What is the cost to control the network?
 
 Blocks for an attack? Reason for choosing a specific number of blocks?
 When we use the word 'control' what is actual meant is the chance of mining $n$ number of blocks in a row to a certain threshold. What is the threshold?
-In answering the question, what is $n$, when considering reorgs, they go passed the coinable transaction, that is a good limit. 
+In answering the question, what is $n$, when considering reorgs, they go passed the coinbase transaction, that is a good limit. 
 
-So to rephrase the question, what is the chance of mining $n$ blocks in a row?
+So to rephrase the question, what is the chance of mining $n$ blocks in a row? What is the probability of mining $n$ blocks in a row? Let $n$ = 20, 50, 100 
 
 A series of scenarios will be played out. Which scenario is more efficient? Which is cheaper- buying hashrate is easier?
 
@@ -104,7 +104,6 @@ A series of scenarios will be played out. Which scenario is more efficient? Whic
 - Model is steady state
 - Define cost that is agnostic of hashrate 
 - Hashrate is constant --> Difficulty is constant 
-
 
 
 ### Input assumptions 
@@ -125,7 +124,7 @@ $n$ hashes mining Tari, you need more --> argue the cost is zero
 
 #### Scenario 2 
 
-Merged mining  50% 		PoW 50% 
+1 x MM 50% 		1 x PoW 50% 
 How much of the PoW hashrate do you need to buy control to make above statement true 
 
 #### Scenario 3
@@ -136,11 +135,11 @@ How much of the PoW hashrate do you need to buy control to make above statement 
 
 #### Scenario 4
 
-2 x MM
+2 x MM 50% 50%
 
 #### Scenario 5 
 
-2 x MM 1 x PoW
+2 x MM 33% 33%	1 x PoW 33%
 
 
 ### Hypothesis
@@ -151,6 +150,12 @@ Scenario 5 best, better than 2 last 3
 
 Consider the dynamic aspects of the hashrate. Scale for Myriad. 
 Is the block time affected by sudden increase in hash rate. This is a dynamic problem. 
+
+#### Thought Process 
+
+- Vary the merged Mined Hashrate controlled (%)
+
+
 
 ## Game Theory 
 
@@ -174,3 +179,11 @@ Electricity, one of the necessities of the human beings, can be considered as bo
 ### Selfish Mining 
 
 ### Eclipse Mining 
+
+### The Double-Spend Attack 
+
+The first type of deviation is when miners deliberately create forks. This is simple to do: when searching for a valid block, just insert the hash of a block on the the blockchain that is not the last block. 
+TO see why a miner might want to create a fork, support in the transaction T, Alice transfers some bitcoins to Bob. Suppose this transaction gets added to the blockchain as part of block b1. Bob only ships the purchased goods to Alice once another block b2 has been appended to b1. When Alice has the goods, she could try the following attack: try to find a valid block b3 extending b0, another block b4 extending b3 and a third block b5 extending b4. Alice does not put transaction T in any of these blocks. 
+If Alice successfully creates these three blocks before any other miner extends b2, then she rips off Bob: b1 and b2 are orphaned and Alice's payment to Bob gets canceled, while the goods have already been sent. This attack is sometimes called the double-spend attack, especially in the case where Alice puts a payment T' to Carol in the block b3, promising the same coins to Carol that she already promised to Bob. 
+The probability that Alice succeeds in her double-spend attack depends on how much computational power she has. Suppose that of all the computational cycles 
+
