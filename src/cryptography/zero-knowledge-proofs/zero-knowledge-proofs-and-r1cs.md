@@ -60,11 +60,3 @@ So the Prover produces proof that they have correctly carried out a specific com
 
 
 
-***Tentatively***, the report will be split into two parts; 
-
-​	PART I	: **R1CS in zk-SNARKs** 
-
-​	PART II	: **R1CS in Bulletproofs**  
-
-
-
