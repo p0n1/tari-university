@@ -38,7 +38,7 @@ So the Prover produces proof that they have correctly carried out a specific com
   
   But the Prover hides the solution by shuffling the numbers according to the shuffle  
   
- 			 1 --> 3		which ends up as		4  3  2  1 
+ 			 1 --> 3		which ends up as	4  3  2  1 
   			 2 --> 4							2  1  3  4 
   			 3 --> 2							1  2  4  3
   			 4 --> 1							3  4  1  2 
