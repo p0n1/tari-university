@@ -185,5 +185,55 @@ Electricity, one of the necessities of the human beings, can be considered as bo
 The first type of deviation is when miners deliberately create forks. This is simple to do: when searching for a valid block, just insert the hash of a block on the the blockchain that is not the last block. 
 TO see why a miner might want to create a fork, support in the transaction T, Alice transfers some bitcoins to Bob. Suppose this transaction gets added to the blockchain as part of block b1. Bob only ships the purchased goods to Alice once another block b2 has been appended to b1. When Alice has the goods, she could try the following attack: try to find a valid block b3 extending b0, another block b4 extending b3 and a third block b5 extending b4. Alice does not put transaction T in any of these blocks. 
 If Alice successfully creates these three blocks before any other miner extends b2, then she rips off Bob: b1 and b2 are orphaned and Alice's payment to Bob gets canceled, while the goods have already been sent. This attack is sometimes called the double-spend attack, especially in the case where Alice puts a payment T' to Carol in the block b3, promising the same coins to Carol that she already promised to Bob. 
-The probability that Alice succeeds in her double-spend attack depends on how much computational power she has. Suppose that of all the computational cycles 
 
+The probability that Alice succeeds in her double-spend attack depends on how much computational power she has. Suppose that of all the computational cycles being devoted to bitcoin mining, Alice controls an x fraction. The fraction x is sometimes called Alice's mining power. Since finding valid blocks just boils down to random guessing or exhaustive search, the probability that Alice is the one who finds the next valid block is well-approximated by x. Finding three blocks in a row before anyone else, as needed in the double-spend attack above, happens with probability only x^3. More generally, if Bob waits for y>=1 blocks to be appended to b1 before shipping the goods, then the probability that a double-spend attack succeeds is only x^(y+2).
+
+How big is x? If just a solo miner, then not very big. However many miners participate in mining pools, where the miners join forces, all working on the same puzzle, and sharing the rewards of finding a valid block among the pool members. The reward is shared proportionally, according to the amount of computation contributed by each member of the pool. 
+
+### Difficulty 
+
+Difficulty is a value used to show how hard it is to find a hash that will be lower than target defined by the system. 
+
+The Bitcoin network has a global block difficulty. Valid blocks must have a hash below this target. Mining pools also have a pool-specific share difficulty setting a lower limit for shares. 
+
+Difficulty changes every 2016 blocks. This is calculated using the following formula:
+
+$$
+
+difficulty = \frac{difficulty_1_target}{current_target}
+
+$$
+
+Where the target is a 256-bit number 
+
+difficulty_1_target can take various values. Traditionally it's a hash function first 32 bits of which are equal to 0 while all the rest are 1 (it is also called diff or pool difficulty). Bitcoin protocol provides target as a type with floating point and limited accuracy. Different Bitcoin clients often determine cryptocurrency difficulty based on this data. 
+
+Difficulty is changed every 2016 blocks based not eh time it took to discover 2016 previous blocks will take exactly 2 weeks. If previous 2016 blocks were found in more than two weeks the cryptocurrency mining will be lowered, and if they were mined faster than that it will be raised. The more (or less) time was spent on finding the previous 2016 blocks the more will difficulty be lowered (raised) 
+
+
+### block time 
+
+Average time of finding a single block can be calculated using this formula
+
+$$
+
+Time = difficulty x 2 x 32/ hashrate
+
+Where 'difficulty' is the current cryptocurrency difficulty level of BTC difficulty network and 'hashrate' is the amount of hashes a miner finds per second. 
+
+### Difficulty in Monero
+
+The difficulty adjusts with each block. 
+
+The adjustment algorithm examines 720 prior blocks, starting from 15 blocks ago. 
+
+Of those 720 blocks, the 60 highest and lowest block times are excluded from the analysis, which leaves 600 blocks 
+
+Out of those 600 blocks, the average block time is determined. This average is then used to adjust the difficulty proportionally in order to target a 120 seconds. The unit of difficulty is therefor "hashes". 
+
+When there is a large and sudden change in hashrate, due to the April 6th PoW change, it will therefore take 15+60=75 blocks before the change in hashrate starts to affect the difficulty. The change to difficulty when adjusting to the new hashrate will be gradual, and after 
+
+
+Calculate network hashrate from current difficulty?
+
+difficulty*120/seconds_for_block (120 here is hard coded value, estimated time for single block)
