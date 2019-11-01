@@ -38,19 +38,12 @@ So the Prover produces proof that they have correctly carried out a specific com
   
   But the Prover hides the solution by shuffling the numbers according to the shuffle  
   
- 			 1 --> 3 
-  			 2 --> 4 
-  			 3 --> 2 
-  			 4 --> 1 
+ 			 1 --> 3		which ends up as		4  3  2  1 
+  			 2 --> 4							2  1  3  4 
+  			 3 --> 2							1  2  4  3
+  			 4 --> 1							3  4  1  2 
   
-   which ends up as  
-   
-   			 4  3  2  1 
-   			 2  1  3  4   
-   			 1  2  4  3
-   			 3  4  1  2  
-   
-   The Prover them covers each cell of the board and the shuffle, before allowing the Verifier to come look 
+   The Prover then covers each cell of the board and the shuffle, before allowing the Verifier to come look 
    
    			 X  X  X  X		the shuffle		X --> X	
    			 X  X  X  X					X --> X 
@@ -62,7 +55,7 @@ So the Prover produces proof that they have correctly carried out a specific com
        a) reveal a certain row, or  
        b) reveal a certain column, or  
        c) reveal a square, or  
-       d) reveal initially filled cells & the shuffling. 
+       d) reveal initially filled cells & the shuffle. 
 
    Say, the Verifier chooses the last option, and finds 
   
@@ -71,7 +64,7 @@ So the Prover produces proof that they have correctly carried out a specific com
    			 1  X  X  X					3 --> 2 
    			 X  4  1  X					4 --> 1    
   
-   She now uses the shuffle on the revealed cells to find   
+   She now uses the shuffle (in reverse) on the revealed cells to find   
   
    			 X  X  3  X  
    			 3  X  X  2 	
