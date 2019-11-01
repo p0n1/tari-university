@@ -52,10 +52,10 @@ So the Prover produces proof that they have correctly carried out a specific com
    
    The Prover them covers each cell of the board and the shuffle, before allowing the Verifier to come look 
    
-   			 X  X  X  X 		the shuffle 	X --> X	
-   			 X  X  X  X 					X --> X 
-   			 X  X  X  X 					X --> X 
-   			 X  X  X  X  					X --> X 
+   			 X  X  X  X		the shuffle 	X --> X	
+   			 X  X  X  X					X --> X 
+   			 X  X  X  X					X --> X 
+   			 X  X  X  X					X --> X 
 
    Here are the rules for verification. The Verifier is only allowed one of the following options; ask the Prover to either
 
@@ -66,10 +66,10 @@ So the Prover produces proof that they have correctly carried out a specific com
 
    Say, the Verifier chooses the last option, and finds 
   
-   			 X  X  2  X 		the shuffle 	1 --> 3	
-   			 2  X  X  4 						2 --> 4 
-   			 1  X  X  X 					3 --> 2 
-   			 X  4  1  X  					4 --> 1    
+   			 X  X  2  X		the shuffle 	1 --> 3	
+   			 2  X  X  4					2 --> 4 
+   			 1  X  X  X					3 --> 2 
+   			 X  4  1  X					4 --> 1    
   
    She now uses the shuffle on the revealed cells to find   
   
