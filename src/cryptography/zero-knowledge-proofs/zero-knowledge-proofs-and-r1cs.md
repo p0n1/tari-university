@@ -12,9 +12,9 @@ zk-SNARKs and Bulletproofs are special proof protocols in the family of Non-Inte
   
   ## Zero-Knowledge Proofs 
 
-Unlike Bitcoin which keeps transacting parties anonymous yet leaving transaction amounts in the open, cryptocurrencies such as Monero and Zcash make sure that both the transacting parties and their transactions are confidential. The challenge, however, in such cryptocurrencies with confidential transactions (CTs) is how one party can verify that the other has actually made the right transaction. This is where zero-knowledge proofs come in. 
+Unlike Bitcoin which keeps transacting parties anonymous yet leaving transaction amounts in the open, cryptocurrencies such as Monero and Zcash make sure that both the transacting parties and their transactions are confidential. The challenge, however, in such cryptocurrencies with confidential transactions (CTs) is how one party can verify that the other has actually made the right transaction. This is where zero-knowledge (ZK) proofs come in. 
 
-A zero-knowledge proof protocol consists primarily of two parties, the Prover and the Verifier, where the Verifier poses a computational challenge to the Prover, who in turn provides proof that they have correctly solved the challenge without disclosing the actual solution or how they solved it. 
+A ZK proof protocol consists primarily of two parties, the Prover and the Verifier, where the Verifier poses a computational challenge to the Prover, who in turn provides proof that they have correctly solved the challenge without disclosing the actual solution or how they solved it. 
 
 So the Prover produces proof that they have correctly carried out a specific computation, and the Verifier validates the proof. The protocol qualifies as 'zero-knowledge' proof protocol if the Prover simply proves to the Verifier that the computation is done correctly, without disclosing their solution or how the computations were carried out.  
    
@@ -39,9 +39,9 @@ So the Prover produces proof that they have correctly carried out a specific com
   But the Prover hides the solution by shuffling the numbers according to the shuffle  
   
  			 1 --> 3		which ends up as	4  3  2  1 
-  			 2 --> 4							2  1  3  4 
-  			 3 --> 2							1  2  4  3
-  			 4 --> 1							3  4  1  2 
+  			 2 --> 4						2  1  3  4 
+  			 3 --> 2						1  2  4  3
+  			 4 --> 1						3  4  1  2 
   
    The Prover then covers each cell of the board and the shuffle, before allowing the Verifier to come look 
    
@@ -54,7 +54,7 @@ So the Prover produces proof that they have correctly carried out a specific com
 
        a) reveal a certain row, or  
        b) reveal a certain column, or  
-       c) reveal a square, or  
+       c) reveal a 2x2 square, or  
        d) reveal initially filled cells & the shuffle. 
 
    Say, the Verifier chooses the last option, and finds 
@@ -85,9 +85,10 @@ So the Prover produces proof that they have correctly carried out a specific com
    
    Yet in all these rounds, the Prover's solution is never fully revealed. That's how a zero-knowledge proof protocol works.  
 
-   This example of a zero-knowledge protocol is clearly interactive, that is both the Prover and the Verifier have to be present for the verification to be completed. 
+   This example of a ZK proof protocol is clearly interactive, that is, both the Prover and the Verifier have to be present for the verification to be completed. 
    
-  
+ 
+ One of the fundamental ideas with ZK proof protocols is that the Prover does most of the computations and provides proof while the Verifier does little to simply check the proof. 
   
   
   ## Non-Interactive Zero Knowledge Proofs 
@@ -98,6 +99,10 @@ So the Prover produces proof that they have correctly carried out a specific com
   
 
   ## Zero-Knowledge SNARKs  
+  
+  "The first constructions of SNARK protocols were inspired by the PCP theorem which shows that NP statements have ‘short’ probabilistic checkable proofs. New instantiations were found which allow faster and shorter proofs, when a pre-processing state is permitted" [6.]   
+ 
+ 
   
   ###  5-step process of creating a zk-SNARK for a computation 
   
@@ -137,6 +142,8 @@ So the Prover produces proof that they have correctly carried out a specific com
 
 [4.] Rietwiessner, Christian; *Introduction to SNARKs*, DevCon 3, https://www.youtube.com/watch?v=jr95o_k_SwI 
 
+[5.] ... NIZKs 
 
+[6.] Mayer, Hartwig; *zk-SNARKS Explained: Basic Principles*, CoinFabrik, 06 Dec, 2016.
 
 
