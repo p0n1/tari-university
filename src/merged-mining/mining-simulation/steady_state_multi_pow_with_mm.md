@@ -1,4 +1,4 @@
-# Merged Mining and Mining Centralization 
+# Steady-state Multiple PoW with Merged Mining 
 
 **Blockchain modelling: Investigate merged-mining and mining centralisation**
 
@@ -22,7 +22,7 @@ While Satoshi's orginal vision of the mining process involved the concept of one
 
 While Corallo acknowledged miners can gain an advantage by obtaining access to the cheapest electricity in the world, he also pointed out that the availability of cheap power in chunks of 10 to 100 megawatts is somewhat limited and these sorts of setups won’t necessarily account for a large chunk of the overall network hashrate.
 
-### A New Bitcoin Mining Protocol 
+### A New Bitcoin Mining Protocol 
 
 Braiins announced a redesigned mining protocol as part of a new, open, and transpatent Bitcoin mining stack. 
 
@@ -199,9 +199,7 @@ The Bitcoin network has a global block difficulty. Valid blocks must have a hash
 Difficulty changes every 2016 blocks. This is calculated using the following formula:
 
 $$
-
 difficulty = \frac{difficulty_1_target}{current_target}
-
 $$
 
 Where the target is a 256-bit number 
