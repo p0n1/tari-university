@@ -208,6 +208,24 @@ difficulty_1_target can take various values. Traditionally it's a hash function 
 
 Difficulty is changed every 2016 blocks based not eh time it took to discover 2016 previous blocks will take exactly 2 weeks. If previous 2016 blocks were found in more than two weeks the cryptocurrency mining will be lowered, and if they were mined faster than that it will be raised. The more (or less) time was spent on finding the previous 2016 blocks the more will difficulty be lowered (raised) 
 
+https://bitcoin.stackexchange.com/questions/5838/how-is-difficulty-calculated
+
+https://en.bitcoinwiki.org/wiki/Difficulty_in_Mining
+
+
+
+Hashrate
+
+https://forum.zcashcommunity.com/t/how-to-calculate-network-hasrate-from-current-difficulty/15577
+
+https://coinsutra.com/hash-rate-or-hash-power/
+
+
+
+Mining pool difficulty 
+
+https://bitcointalk.org/index.php?topic=5137845.0
+
 
 ### block time 
 
@@ -235,3 +253,13 @@ When there is a large and sudden change in hashrate, due to the April 6th PoW ch
 Calculate network hashrate from current difficulty?
 
 difficulty*120/seconds_for_block (120 here is hard coded value, estimated time for single block)
+
+
+
+For version 2
+
+- alpha trimmed mean 
+- linearly weighted moving average (LWMA)
+- moving median 
+- https://en.bitcoin.it/wiki/Block_timestamp
+- https://monero.stackexchange.com/questions/3300/timestamp-question
