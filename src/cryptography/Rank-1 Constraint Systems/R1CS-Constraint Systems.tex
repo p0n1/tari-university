@@ -1,0 +1,42 @@
+
+ Keys need to be generated; one for the Verifier, *vk*, and another for the Prover, *pk*. Some information, *x*, needs to be made public, while the Prover needs to have a 'unique' secret, *w*, called the *witness*. 
+ 
+
+  ## Zero-Knowledge SNARKs  
+  
+  "The first constructions of SNARK protocols were inspired by the PCP theorem which shows that NP statements have ‘short’ probabilistic checkable proofs. New instantiations were found which allow faster and shorter proofs, when a pre-processing state is permitted" [8.]   
+ 
+ 
+  ***** *********
+ 
+ 
+ A typical zk-SNARK consists of three components  ( **G, P, V** ),  where  **G**  is the Key Generator,  **P**  is the Prover, and  **V**  is the Verifier. 
+ 
+  
+  In many zk-SNARKs schemes, the statement being proved is reduced to what is called a rank-1 constraint system, or R1CS. In this system, the prover is given a system of arithmetic constraints over a set of variables (elements in a large prime field F_r ), and asked to produce an assignment to the variables that satisfy the constraints.  
+ 
+  
+  ###  5-step process of creating a zk-SNARK for a computation 
+  
+  (Computation —> Arithmetic Circuit —> R1CS —> QAP —> Linear PCP —> zk-SNARK). PCP = probabilistically checkable proofs. 
+
+ 
+
+  ## What is a Rank-1 Constraint Systems 
+  
+   
+  \begin{equation}
+G^v \cdot G^u = G^{v + u}
+\end{equation}
+  
+  ​  
+  ## Rank-1 Constraint Systems and Bulletproofs  
+  
+  
+  
+  
+  ## Various Ways to Implement R1CS 
+- Cf. [2.] above regarding the “binary file format” versa vis “JSON lines format” (sizes of the constraints) 
+- Implementation cases: Zcash, Zcoin,… Stellar (cf. Cathie Yun’s article “Programmable Constraint Systems for Bulletproofs”
+- "Libra: Succinct Zero-Knowledge Proof with Optimal Prover Computation" - Tiancheng Xie et al, eprint.iacr.org/2019/317.pdf  
+
