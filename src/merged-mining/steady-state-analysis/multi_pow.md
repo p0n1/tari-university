@@ -1,4 +1,4 @@
-# Cost Based Steady-State Multiple PoW
+# Cost Based Steady-State Analysis of Multiple PoW
 
 - [Aim](#aim)
 - [Introduction](#introduction)

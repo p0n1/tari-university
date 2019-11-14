@@ -24,7 +24,7 @@
     - [Directed Acyclic Graphs](scaling/directed-acyclic-graphs/DAGs.md)
   - [Merged Mining](./merged-mining/merged-mining.md)
     - [Merged Mining Introduction](merged-mining/merged-mining-scene/MergedMiningIntroduction.md)
-    - [Cost Based Steady-State Multiple PoW](merged-mining/steady-state-analysis/multi_pow.md)
+    - [Cost Based Steady-State Analysis of Multiple PoW](merged-mining/steady-state-analysis/multi_pow.md)
   - [Digital Assets](./digital-assets/digital-assets.md)
     - [Application of *Howey* to Blockchain Network Token Sales](digital-assets/howey-application-to-blockchain/MainReport.md)
     - [Non-fungible Tokens Survey](digital-assets/nft-landscape-1/sources/PITCHME.link.md)
