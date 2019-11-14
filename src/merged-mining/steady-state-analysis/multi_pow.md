@@ -1,4 +1,4 @@
-# Cost based steady-state Multiple PoW
+# Cost Based Steady-State Multiple PoW
 
 - [Aim](#aim)
 - [Introduction](#introduction)
