@@ -4,9 +4,7 @@
 - [Introduction](#introduction)
 	- [Question](#question)
 		- [Definition of Control](#definition-of-control)
-    	- [Definition of Cost](#definition-of-cost)
     	- [Hashrate](#hashrate) 
-    	- [Difficulty](#difficulty) 
     		- [Mining Pool Difficulty](#mining-pool-difficulty) 	
     - [Game Theory](#game-theory)
 - [Attack Vectors](#attack-vectors)
@@ -37,24 +35,16 @@
 
 ## Aim 
 
-The report will contain an analysis of simulations built that calculate the cost to control the network with variations in the number and type of mining algorithm. These simulations will pave the way for secondary study which would encompass adjusting difficulty dynamically. 
-
-The  report will discuss various methods of using multiple PoW algorithms which changes the cost to attack in a variety of ways depending on the configuration
+The aim of this report is to provide an analysis of simulations built that calculate the cost to control the network with variations in the number and type of mining algorithm. The  report will discuss various methods of using multiple PoW algorithms which changes the cost to attack in a variety of ways depending on the configuration. 
 
 ## Introduction 
 
 ### Question 
 
-What is the cost to control the network?
-
-- Need to simulate to see if its more stable if its more active 
-- parametrised sim of this approach. I suspect that it can be tuned to be far better than that data shows
-- How it is affected by selfish mining- I suspect it will be fine but the sim should be able to show the effect of that
-- Query: You You actually want consensus to be achieved only when every algo has a block, So perhaps 2 * num algos? Hypothesis: I think that if you get the difficulty adjustment right you don't need that. However we are speculating, a sim would answer a lot of these questions
+**What is the cost to control the network?**
 
 #### Definition of Control 
 
-Blocks for an attack? Reason for choosing a specific number of blocks?
 When we use the word 'control' what is actual meant is the chance of mining $n$ number of blocks in a row to a certain threshold. What is the threshold?
 In answering the question, what is $n$, when considering reorgs, they go passed the coinbase transaction, that is a good limit. 
 
@@ -62,21 +52,13 @@ So to rephrase the question, what is the chance of mining $n$ blocks in a row? W
 
 A series of scenarios will be played out. Which scenario is more efficient? Which is cheaper- buying hashrate is easier?
 
-#### Definition of Cost 
-
 #### Hashrate
 
-https://forum.zcashcommunity.com/t/how-to-calculate-network-hasrate-from-current-difficulty/15577
-
-https://coinsutra.com/hash-rate-or-hash-power/
-
-#### Difficulty 
-
-Difficulty is a value used to show how hard it is to find a hash that will be lower than target defined by the system. 
+Hash rate, similarly known as hash power, is the unit that measures how much power a cryptocurrency network using proof-of-work is consuming to be continuously functional, i.e. how much hash power it is consuming to generate blocks at the normal mean time. [[1]]
 
 ##### Mining Pool Difficulty
 
-https://bitcointalk.org/index.php?topic=5137845.0
+Each mining pool sets its own difficulty, which is lower than that of the network, to award the participants in accordance with the work they are doing. [[2]] But how does one know what the hashing power is of a particular machine?  It's by the diff of the submitted shares coupled with the time needed to generate said shares.  Higher diff/longer time is eqivalent to lower diff/shorter time.  Hashpower at the pool level is back calculated via diff of shares and time; for the whole Network it is based on solved blocks and time.
 
 #### Game Theory
 
@@ -88,9 +70,11 @@ In Proof of Work (PoW) cryptocurrencies, nodes typically are set up to recognize
 
 Since other nodes only know about the main chain, they will see the first transaction as valid, and exchanges, etc will accept this transaction as valid. This malicious node can later release these silently mined blocks, and other nodes will accept this as the new 'correct chain' since it is longer. This will cause the original transaction to effectively dissappear, and nodes will recognize the funds as being sent to the address from the new chain instead. This is known as a 'double spend' attack.
 
-Most bigger cryptocurrencies have sufficient mining capacity behind them, making it extremely expensive to acquire the necessary hardware to pull an attack like this off. Smaller cryptocurrencies have less hashing power securing the network, making it possible to simply rent hashing power from miners on a service like [Nicehash](https://www.nicehash.com/) for a few hours. This significantly reduces the capital costs of an attack.
+Most bigger cryptocurrencies have sufficient mining capacity behind them, making it extremely expensive to acquire the necessary hardware to pull an attack like this off. Smaller cryptocurrencies have less hashing power securing the network, making it possible to simply rent hashing power from miners on a service like NichHash for a few hours. This significantly reduces the capital costs of an attack.
 
-Recently there have been a number of 51% attacks including a [high profile attack](https://qz.com/1287701/bitcoin-golds-51-attack-is-every-cryptocurrencys-nightmare-scenario/) against Bitcoin Gold where $18 Million was stolen.
+Recently there have been a number of 51% attacks including against Bitcoin Gold where $18 Million was stolen. [[3]]
+
+#### NiceHash
 
 ### Selfish Mining 
 
@@ -100,7 +84,7 @@ Recently there have been a number of 51% attacks including a [high profile attac
 
 Using the prices NiceHash lists for different algorithms we are able to calculate how much it would cost to rent enough hashing power to match the current network hashing power for an hour. Nicehash does not have enough hashing power for most larger coins, so we also calculated what percentage of the needed hashing power is available from Nicehash.
 
-Note that the attack cost does not include the block rewards that the miner will receive for mining. In some cases this can be quite significant, and reduce the attack cost by up to 80%. https://www.crypto51.app/about.html
+Note that the attack cost does not include the block rewards that the miner will receive for mining. In some cases this can be quite significant, and reduce the attack cost by up to 80%. [[3]]
 
 ## Mining Centralization 
 
@@ -114,9 +98,9 @@ During the future of Bitcoin minin gat the Bitcoin 2019 conference, Streng made 
 
 While Satoshi's orginal vision of the mining process involved the concept of one vote per computer, that optimistic vision was thrown out rahter early in Bitcoin's history. By 2012, hardware devices built for the specifdic purpose of mining Bitcpin had been developed, and Bitcoin mining was on its way towards specialization and industrialization. 
 
-While Corallo acknowledged miners can gain an advantage by obtaining access to the cheapest electricity in the world, he also pointed out that the availability of cheap power in chunks of 10 to 100 megawatts is somewhat limited and these sorts of setups won’t necessarily account for a large chunk of the overall network hashrate.
+While Corallo acknowledged miners can gain an advantage by obtaining access to the cheapest electricity in the world, he also pointed out that the availability of cheap power in chunks of 10 to 100 megawatts is somewhat limited and these sorts of setups won’t necessarily account for a large chunk of the overall network hashrate. [[4]] 
 
-Decentralisation of mining power is important to keep control of a coin demecratic. [[1]] https://en.bitcoinwiki.org/wiki/MyriadCoin
+Decentralisation of mining power is important to keep control of a coin democratic. [[5]]
 
 ## Brief look at MyraidCoin 
 
@@ -135,16 +119,16 @@ The process of searching for blocks that meet this proof-of-work threshold is ca
 Myriadcoin was created to address the issues surrounding the proof-of-work system used to allow blocks to be added to the blockchain by allowing multiple types of hardware to be used in the mining process (e.g. CPU, GPU, ASIC). This was accomplished by using multiple different proof-of-work systems to accept blocks, and it was the first coin to use this for this purpose. Currently, it uses five different hashing algorithms as proof of work, with each algorithm aimed to support a different segment of miners:
 
 - SHA256d and Scrypt for ASIC miners (merge minable)
-- [Skein](https://en.bitcoinwiki.org/index.php?title=Skein_(hash_function)&action=edit&redlink=1) and Myr-Groestl for GPU miners
+- Skein and Myr-Groestl for GPU miners
 - Yescrypt for GPU and CPU miners
 
-This design structure was chosen to make Myriadcoin resistant to ASIC specialization and centralization as the hardware requirements for the algorithms are different. Myriadcoin is also resistant to consensus attacks such as a 51% attack. 51% attacks can occur when an entity controls over 50% of the network's hashrate, which would allow the controller to exclude transactions from the blockchain and reverse transactions created while they maintain control over the network. In Myriadcoin, the possibility for this is reduced as a user would need to control over 50% of the hashing power across multiple algorithms.
+This design structure was chosen to make Myriadcoin resistant to ASIC specialization and centralization as the hardware requirements for the algorithms are different. Myriadcoin is also resistant to consensus attacks such as a 51% attack. 51% attacks can occur when an entity controls over 50% of the network's hashrate, which would allow the controller to exclude transactions from the blockchain and reverse transactions created while they maintain control over the network. In Myriadcoin, the possibility for this is reduced as a user would need to control over 50% of the hashing power across multiple algorithms. [[5]]
 
 ## Bitcoin Algorithms 
 
 ### Bitcoin Difficulty Algorithm
 
-The Bitcoin network has a global block difficulty. Valid blocks must have a hash below this target. Mining pools also have a pool-specific share difficulty setting a lower limit for shares. 
+The bitcoin network has a global block difficulty. Valid block must have a hash below this target. Mining pools also have a pool-specific share difficulty setting a lower linit for shares. [[6]][[7]]
 
 Difficulty changes every 2016 blocks. This is calculated using the following formula:
 
@@ -156,11 +140,7 @@ Where the target is a 256-bit number
 
 difficulty_1_target can take various values. Traditionally it's a hash function first 32 bits of which are equal to 0 while all the rest are 1 (it is also called diff or pool difficulty). Bitcoin protocol provides target as a type with floating point and limited accuracy. Different Bitcoin clients often determine cryptocurrency difficulty based on this data. 
 
-Difficulty is changed every 2016 blocks based not eh time it took to discover 2016 previous blocks will take exactly 2 weeks. If previous 2016 blocks were found in more than two weeks the cryptocurrency mining will be lowered, and if they were mined faster than that it will be raised. The more (or less) time was spent on finding the previous 2016 blocks the more will difficulty be lowered (raised) 
-
-https://bitcoin.stackexchange.com/questions/5838/how-is-difficulty-calculated
-
-https://en.bitcoinwiki.org/wiki/Difficulty_in_Mining
+Difficulty is changed every 2016 blocks based not the time it took to discover 2016 previous blocks will take exactly 2 weeks. If previous 2016 blocks were found in more than two weeks the cryptocurrency mining will be lowered, and if they were mined faster than that it will be raised. The more (or less) time was spent on finding the previous 2016 blocks the more will difficulty be lowered (raised) 
 
 ### Bitcoin Blocktime Algorithm
 
@@ -188,7 +168,11 @@ When there is a large and sudden change in hashrate, due to the April 6th PoW ch
 
 Calculate network hashrate from current difficulty?
 
-difficulty*120/seconds_for_block (120 here is hard coded value, estimated time for single block)
+$$
+difficulty*120/secondsforblock
+$$
+
+(120 here is hard coded value, estimated time for single block)
 
 ### Monero Blocktime Algorithm
 
@@ -219,22 +203,31 @@ $n$ hashes mining Tari, you need more --> argue the cost is zero
 
 ### Scenario 2 
 
-1 x MM 50% 		1 x PoW 50% 
-How much of the PoW hashrate do you need to buy control to make above statement true 
+| Merged Mining | Proof of Work |
+| ------------- | ------------- |
+| 50%           | 50%           |
+
+- How much of the PoW hashrate do you need to buy control to make above statement true 
 
 ### Scenario 3
 
-1 x MM 33% 		2 x PoW 33% 33%
+| Merged Mining | Proof of Work | Proof of Work |
+| ------------- | ------------- | ------------- |
+| 33%           | 33%           | 33%           |
 
-(Thought as a bad idea, flick between the 2- what would happen as they jump between each PoW)
+- Thought as a bad idea, flick between the 2- what would happen as they jump between each PoW
 
 ### Scenario 4
 
-2 x MM 50% 50%
+| Merged Mining | Merged Mining |
+| ------------- | ------------- |
+| 50%           | 50%           |
 
 ### Scenario 5 
 
-2 x MM 33% 33%	1 x PoW 33%
+| Merged Mining | Merged Mining | Proof of Work |
+| ------------- | ------------- | ------------- |
+| 33%           | 33%           | 33%           |
 
 ## Conclusions and Remarks
 
@@ -242,6 +235,8 @@ How much of the PoW hashrate do you need to buy control to make above statement 
 
 Consider the dynamic aspects of the hashrate. Scale for Myriad. 
 Is the block time affected by sudden increase in hash rate. This is a dynamic problem. 
+
+These simulations will pave the way for secondary study which would encompass adjusting difficulty dynamically. 
 
 - alpha trimmed mean 
 - linearly weighted moving average (LWMA)
@@ -251,11 +246,49 @@ Is the block time affected by sudden increase in hash rate. This is a dynamic pr
 
 ## References 
 
-[[1]] "Merged Mining Specification" [online).
+[[1]] "Explaining Hash Rate or Hash Power in Cryptocurrencies" [online].
+Available: <https://coinsutra.com/hash-rate-or-hash-power/>. Date accessed: 2019&#8209;11&#8209;15.
+
+[1]: https://coinsutra.com/hash-rate-or-hash-power/
+"Explaining Hash Rash"
+
+[[2]] "Bitcoin Forum- Question about Mining Pool Difficulty" [online].
+Available: <https://bitcointalk.org/index.php?topic=5137845.0>. Date accessed: 2019&#8209;11&#8209;15.
+
+[2]:https://bitcointalk.org/index.php?topic=5137845.0
+"Bitcoin Forum- Question about Mining Pool Difficulty"
+
+[[3]] "Crypto51" [online].
+Available: <https://www.crypto51.app/about.html>. Date accessed: 2019&#8209;11&#8209;15.
+
+[3]: https://www.crypto51.app/about.html
+"Crypto51"
+
+[[4]] "Bitcoin Mining Centralization is 'Quite Alarming', But A Solution is in the Works" [online].
+Available: <https://www.forbes.com/sites/ktorpey/2019/07/28/bitcoin-mining-centralization-is-quite-alarming-but-a-solution-is-in-the-works/#49b8e6dd530b>. Date accessed: 2019&#8209;11&#8209;15.
+
+[4]: https://www.forbes.com/sites/ktorpey/2019/07/28/bitcoin-mining-centralization-is-quite-alarming-but-a-solution-is-in-the-works/#49b8e6dd530b
+"Bitcoin Mining"
+
+[[5]] "MyriadCoin Wikipedia" [online].
 Available: <https://en.bitcoinwiki.org/wiki/MyriadCoin>. Date accessed: 2019&#8209;11&#8209;13.
 
-[1]: https://en.bitcoin.it/wiki/Merged_mining_specification
-"Merged Mining Specification"
+[5]: https://en.bitcoinwiki.org/wiki/MyriadCoin
+"MyriadCoin Wiki"
+
+[[6]] "Difficulty Wikipedia" [online].
+Available: <https://en.bitcoin.it/wiki/Difficulty>. Date accessed: 2019&#8209;11&#8209;13.
+
+[6]: https://en.bitcoin.it/wiki/Difficulty
+"Difficulty Wiki"
+
+[[7]] "Difficulty in Mining Wikipedia" [online].
+Available: <https://en.bitcoinwiki.org/wiki/Difficulty_in_Mining>. Date accessed: 2019&#8209;11&#8209;15.
+
+[7]:https://en.bitcoinwiki.org/wiki/Difficulty_in_Mining
+"Difficulty in Mining Wiki"
+
+
 
 ## Contributors
 
