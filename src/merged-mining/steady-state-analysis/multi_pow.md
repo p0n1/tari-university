@@ -76,6 +76,12 @@ Recently there have been a number of 51% attacks including against Bitcoin Gold 
 
 #### NiceHash
 
+**NiceHash** is a Slovenian [cryptocurrency](https://en.wikipedia.org/wiki/Cryptocurrency) [hash power](https://en.wikipedia.org/wiki/Cryptographic_hash_function) broker with integrated marketplace that connects sellers of hashing power (miners) with buyers of hashing power using the [sharing economy](https://en.wikipedia.org/wiki/Sharing_economy) approach.
+
+Buyers select the crypto-currency that they want to mine, a [pool](https://en.wikipedia.org/wiki/Mining_pool) on which they want to mine, set the price that they are willing to pay for it, and place the [order](https://en.wikipedia.org/wiki/Order_(exchange)). Once the order is fulfilled by miners who are running NiceHash Miner on their machines, buyer gets the crypto-currency from the pool. This means that buyers aren't required to run complex mining operations themselves, and there is no capital investment in mining hardware required.
+
+https://en.wikipedia.org/wiki/NiceHash
+
 ### Selfish Mining 
 
 ### Eclipse Mining 
@@ -149,6 +155,8 @@ w=1,  r=4 for Digishield, r=2 for Grin
 r=1, w = function of n.   LWMA
 r = 4, and simple w function.  OSS (like a combination of LWMA and Digishield)
 ```
+
+https://github.com/zawy12/difficulty-algorithms/issues/41
 
 ## Bitcoin Algorithms 
 
