@@ -10,7 +10,6 @@
 - [Attack Vectors](#attack-vectors)
 	- [51% attack](#51%-attack)
 	- [Selfish Mining](#self-mining)
-	- [Eclipse Mining](#eclipse-mining)
 - [Calculating-the-Cost-of-an-Attack](calculating-the-cost-of-an-attack)
 - [Mining-Centralization](#mining-centralisation)
 - [Brief look at Myriadcoin](#brief-look-at-myriadcoin)
@@ -78,13 +77,31 @@ Recently there have been a number of 51% attacks including against Bitcoin Gold 
 
 **NiceHash** is a Slovenian [cryptocurrency](https://en.wikipedia.org/wiki/Cryptocurrency) [hash power](https://en.wikipedia.org/wiki/Cryptographic_hash_function) broker with integrated marketplace that connects sellers of hashing power (miners) with buyers of hashing power using the [sharing economy](https://en.wikipedia.org/wiki/Sharing_economy) approach.
 
-Buyers select the crypto-currency that they want to mine, a [pool](https://en.wikipedia.org/wiki/Mining_pool) on which they want to mine, set the price that they are willing to pay for it, and place the [order](https://en.wikipedia.org/wiki/Order_(exchange)). Once the order is fulfilled by miners who are running NiceHash Miner on their machines, buyer gets the crypto-currency from the pool. This means that buyers aren't required to run complex mining operations themselves, and there is no capital investment in mining hardware required.
+Buyers select the crypto-currency that they want to mine, a [pool](https://en.wikipedia.org/wiki/Mining_pool) on which they want to mine, set the price that they are willing to pay for it, and place the [order](https://en.wikipedia.org/wiki/Order_(exchange)). Once the order is fulfilled by miners who are running NiceHash Miner on their machines, buyer gets the crypto-currency from the pool. This means that buyers aren't required to run complex mining operations themselves, and there is no capital investment in mining hardware required.''
 
 https://en.wikipedia.org/wiki/NiceHash
 
 ### Selfish Mining 
 
-### Eclipse Mining 
+Selfish mining is a strategy for mining bitcoin in which groups of miners collude to increase their revenue. Bitcoin was invented to decentralise production and distribution of money. But selfish mining can result in centralization of bitcoin mining operations. 
+
+Selfish minig was first proposed by Cornell researchers Sirer and Eyal in 2013. They proved that miners can earn more bitcoins by hiding newly-generated blocks from the main blockchain and creating a separate fork. 
+
+Bitcoin mining relies on miners who solve cryptographically complex puzzles to generate coins. Income from the activity varies because the process is dependent on several factors, from the difficulty of puzzles being solved to electricity costs to hte quality of Internet connections. The bitcoin protocol is configured to reward miners in proportion to their mining output. This ensures that even if miners organise themselves into large pools, the rewards are still dependent on coins produced by individual miners in teh public blockchain. 
+
+But the above scenario assumes that miners will make their newly-generated blocks avaiable on bitcoin's public blockchain. Sirer and Eyal showed that miners can increase their share of overall revenue by hiding new blocks and making them avaiable to systems within their private network. This practice speeds up the discovery process and irons out infrastructure problems related to mining, such as network latency and electricity costs. 
+
+Intiailly, the forked blockchain will be shorter than the public blockchain. However, selfish miners can strategically time their display of new blocks such that honest miners from teh public blockchain abandon their own chain and join the private chain. Subsequently, the private chain mines new blocks within its pool and hides the newly-generated blocks. 
+
+In the meanwhile, the public blockchain continues mining new blocks. The process is repeated until the private blockchain is greater the public one. Now the private chain reveals its blocks again, and miners from the piblic chain abandon their blocks to join the private chain becauuse it is more lucrative. Sirer and Eyal analyzed resources wasted for both chains and determined that selfish miners possessed a competitive advantage over a miner on the public blockchain because their rewards are comparatively greater due to less wastage. 
+
+"Once a selfish mining pool reaches the threshold (of a public blockchain),rational miners will preferentially join selfish miners to reap the higher revenues as compared to other pools," the reproacher write. According to them, the scenario may result in a situation where the selfish mining chain becomes a majority of the public blockchain. This will collapse bitcoin's decentralised nature and a selfish pool manager will control the system. 
+
+https://www.investopedia.com/terms/s/selfish-mining.asp
+
+Given that most of the network follows the 'standard' Bitcoin protocol, a single node (or a pool) which possesses enough computational resources or is extremely well connected to the rest of the network can increase its expected rewards by deviating from the protocol. While the standard protocol requires nodes to immediately publish any block that they find to teh rest of the network, it has been shown that participants can selfishly increase their revenue by selectively withholding blocks. 
+
+https://arxiv.org/pdf/1507.06183.pdf
 
 ## Calculating the Cost of an Attack 
 
