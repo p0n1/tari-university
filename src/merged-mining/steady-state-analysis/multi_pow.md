@@ -280,6 +280,8 @@ $$
 
 (120 here is hard coded value, estimated time for single block)
 
+### Monero Blocktime Algorithm
+
 ## "Universal" Difficulty Algorithm 
 
 ```
@@ -305,8 +307,6 @@ r = 4, and simple w function.  OSS (like a combination of LWMA and Digishield)
 ```
 
 [[11]] 
-
-### Monero Blocktime Algorithm
 
 ## Hypothesis
 
@@ -373,8 +373,21 @@ These simulations will pave the way for secondary study which would encompass ad
 - alpha trimmed mean 
 - linearly weighted moving average (LWMA)
 - moving median 
-- https://en.bitcoin.it/wiki/Block_timestamp
 - https://monero.stackexchange.com/questions/3300/timestamp-question
+
+### Block timestamp
+
+Each block contains a Unix time timestamp. In addition to serving as a source of variation for the block hash, they also make it more difficult for an adversary to manipulate the block chain.
+
+A timestamp is accepted as valid if it is greater than the median timestamp of previous 11 blocks, and less than the network-adjusted time + 2 hours. "Network-adjusted time" is the median of the timestamps returned by all nodes connected to you. As a result block timestamps are not exactly accurate, and they do not need to be. Block times are accurate only to within an hour or two.
+
+Whenever a node connects to another node, it gets a UTC timestamp from it, and stores its offset from node-local UTC. The network-adjusted time is then the node-local UTC plus the median offset from all connected nodes. Network time is never adjusted more than 70 minutes from local system time, however.
+
+Bitcoin uses an unsigned integer for the timestamp, so the year 2038 problem is delayed for another 68 years. [[11]]
+
+Synchronizing time across machines is difficult due to clock drift and network latencies. The timestamp of a block in Monero is specified by the miner, and the nodes only enforce that the timestamp of a new block is greater than the median of the last 60 blocks. If the nodes used their local clock to enforce timestamp, there would be some risk of disagreement of the validity of the newest block, and therefore a potential chain fork could result. Searching anything related to Bitcoin would be of use too, because identical issues with time are present on that system.
+
+A system could require that the timestamps strictly increase or remain equal, but that could force a miner to put a timestamp that they viewed as incorrect in subsequent blocks. [[12]]
 
 ## References 
 
@@ -454,6 +467,24 @@ Available: <https://github.com/zawy12/difficulty-algorithms/issues/41>. Date acc
 [10]: https://github.com/zawy12/difficulty-algorithms/issues/41
 
 "'Universal' Difficulty Algorithm"
+
+[10]: https://en.bitcoinwiki.org/wiki/Difficulty_in_Mining
+
+"Difficulty in Mining Wiki"
+
+[[11]] "'Block timestamp" [online].
+Available: https://en.bitcoin.it/wiki/Block_timestamp. Date accessed: 2019&#8209;11&#8209;18.
+
+[11]: https://en.bitcoin.it/wiki/Block_timestamp
+
+"Timestamp Question"
+
+[[12]] "'Block timestamp" [online].
+Available: https://monero.stackexchange.com/questions/3300/timestamp-question. Date accessed: 2019&#8209;11&#8209;18.
+
+[12]: https://monero.stackexchange.com/questions/3300/timestamp-question
+
+"Timestamp Question"
 
 
 
