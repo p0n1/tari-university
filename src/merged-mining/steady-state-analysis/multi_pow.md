@@ -13,13 +13,13 @@
 - [Calculating-the-Cost-of-an-Attack](calculating-the-cost-of-an-attack)
 - [Mining-Centralization](#mining-centralisation)
 - [Brief look at Myriadcoin](#brief-look-at-myriadcoin)
-- 
 - [Bitcoin Algorithms](#bitcoin-algorithms)  
 	- [Bitcoin Difficulty Algorithm](#bitcoin-difficulty-algorithm)
 	- [Bitcoin Blocktime Algorithm](#bitcoin-blocktime-algorithm) 
 - [Monero Algorithms](#monero-algorithms)
 	- [Monero Difficulty Algorithm](#monero-difficulty-algorithm)
-	- [Monero Blocktime Algorithm](#monero-blocktime-algorithm) 	
+	- [Monero Blocktime Algorithm](#monero-blocktime-algorithm) 
+- [Universal Difficulty Algorithm](#universal-difficulty-algorithm)
 - [Hypothesis](#hypothesis) 
 	- [Assumptions](#assumptions)
 - [Implementation](#method)
@@ -150,9 +150,7 @@ Similarly, let’s use this logic for blockchains. If a blockchain is taken over
 - The argument holds up if they are bound and loyal to a particular currency. After all, it is in their direct interest to uphold and maintain the value and legitimacy of the currency.
 - If the currency requires specialized ASICs, then the grim trigger argument holds up. If a currency can only be mined by specialized software, then miners will make sure that nothing happens to that particular currency and that it doesn’t lose value. Specialized ASICs after all, can only work for a particular currency. Otherwise, it is useless. Plus, they are expensive.
 - The argument doesn’t hold up if the currency can be mined using CPUs. CPUs are not expensive after all, and it can be used to mine other currencies.
-- However, if the miners who own the CPUs have a stake in the currency, the argument holds up because they don’t want to lose the stake that they have invested in the currency. This is a sort of proof-of-stake.
-
-https://blockgeeks.com/guides/cryptocurrency-game-theory/
+- However, if the miners who own the CPUs have a stake in the currency, the argument holds up because they don’t want to lose the stake that they have invested in the currency. This is a sort of proof-of-stake. [[3]]
 
 ## Attack Vectors 
 
@@ -164,15 +162,13 @@ Since other nodes only know about the main chain, they will see the first transa
 
 Most bigger cryptocurrencies have sufficient mining capacity behind them, making it extremely expensive to acquire the necessary hardware to pull an attack like this off. Smaller cryptocurrencies have less hashing power securing the network, making it possible to simply rent hashing power from miners on a service like NichHash for a few hours. This significantly reduces the capital costs of an attack.
 
-Recently there have been a number of 51% attacks including against Bitcoin Gold where $18 Million was stolen. [[3]]
+Recently there have been a number of 51% attacks including against Bitcoin Gold where $18 Million was stolen. [[4]]
 
 #### NiceHash
 
 **NiceHash** is a Slovenian cryptocurrency hash power broker with integrated marketplace that connects sellers of hashing power (miners) with buyers of hashing power using the sharing economy approach.
 
-Buyers select the crypto-currency that they want to mine, a pool on which they want to mine, set the price that they are willing to pay for it, and place the order. Once the order is fulfilled by miners who are running NiceHash Miner on their machines, buyer gets the crypto-currency from the pool. This means that buyers aren't required to run complex mining operations themselves, and there is no capital investment in mining hardware required.''
-
-https://en.wikipedia.org/wiki/NiceHash
+Buyers select the crypto-currency that they want to mine, a pool on which they want to mine, set the price that they are willing to pay for it, and place the order. Once the order is fulfilled by miners who are running NiceHash Miner on their machines, buyer gets the crypto-currency from the pool. This means that buyers aren't required to run complex mining operations themselves, and there is no capital investment in mining hardware required.''[[5]]
 
 ### Selfish Mining 
 
@@ -188,19 +184,13 @@ Intiailly, the forked blockchain will be shorter than the public blockchain. How
 
 In the meanwhile, the public blockchain continues mining new blocks. The process is repeated until the private blockchain is greater the public one. Now the private chain reveals its blocks again, and miners from the piblic chain abandon their blocks to join the private chain becauuse it is more lucrative. Sirer and Eyal analyzed resources wasted for both chains and determined that selfish miners possessed a competitive advantage over a miner on the public blockchain because their rewards are comparatively greater due to less wastage. 
 
-"Once a selfish mining pool reaches the threshold (of a public blockchain),rational miners will preferentially join selfish miners to reap the higher revenues as compared to other pools," the reproacher write. According to them, the scenario may result in a situation where the selfish mining chain becomes a majority of the public blockchain. This will collapse bitcoin's decentralised nature and a selfish pool manager will control the system. 
-
-https://www.investopedia.com/terms/s/selfish-mining.asp
-
-Given that most of the network follows the 'standard' Bitcoin protocol, a single node (or a pool) which possesses enough computational resources or is extremely well connected to the rest of the network can increase its expected rewards by deviating from the protocol. While the standard protocol requires nodes to immediately publish any block that they find to teh rest of the network, it has been shown that participants can selfishly increase their revenue by selectively withholding blocks. 
-
-https://arxiv.org/pdf/1507.06183.pdf
+"Once a selfish mining pool reaches the threshold (of a public blockchain),rational miners will preferentially join selfish miners to reap the higher revenues as compared to other pools," the reproacher write. According to them, the scenario may result in a situation where the selfish mining chain becomes a majority of the public blockchain. This will collapse bitcoin's decentralised nature and a selfish pool manager will control the system. [[6]]
 
 ## Calculating the Cost of an Attack 
 
 Using the prices NiceHash lists for different algorithms we are able to calculate how much it would cost to rent enough hashing power to match the current network hashing power for an hour. Nicehash does not have enough hashing power for most larger coins, so we also calculated what percentage of the needed hashing power is available from Nicehash.
 
-Note that the attack cost does not include the block rewards that the miner will receive for mining. In some cases this can be quite significant, and reduce the attack cost by up to 80%. [[3]]
+Note that the attack cost does not include the block rewards that the miner will receive for mining. In some cases this can be quite significant, and reduce the attack cost by up to 80%. [[4]]
 
 ## Mining Centralization 
 
@@ -214,9 +204,9 @@ During the future of Bitcoin minin gat the Bitcoin 2019 conference, Streng made 
 
 While Satoshi's orginal vision of the mining process involved the concept of one vote per computer, that optimistic vision was thrown out rahter early in Bitcoin's history. By 2012, hardware devices built for the specifdic purpose of mining Bitcpin had been developed, and Bitcoin mining was on its way towards specialization and industrialization. 
 
-While Corallo acknowledged miners can gain an advantage by obtaining access to the cheapest electricity in the world, he also pointed out that the availability of cheap power in chunks of 10 to 100 megawatts is somewhat limited and these sorts of setups won’t necessarily account for a large chunk of the overall network hashrate. [[4]] 
+While Corallo acknowledged miners can gain an advantage by obtaining access to the cheapest electricity in the world, he also pointed out that the availability of cheap power in chunks of 10 to 100 megawatts is somewhat limited and these sorts of setups won’t necessarily account for a large chunk of the overall network hashrate. [[7]] 
 
-Decentralisation of mining power is important to keep control of a coin democratic. [[5]]
+Decentralisation of mining power is important to keep control of a coin democratic. [[8]]
 
 ## Brief look at MyraidCoin 
 
@@ -238,46 +228,18 @@ Myriadcoin was created to address the issues surrounding the proof-of-work syste
 - Skein and Myr-Groestl for GPU miners
 - Yescrypt for GPU and CPU miners
 
-This design structure was chosen to make Myriadcoin resistant to ASIC specialization and centralization as the hardware requirements for the algorithms are different. Myriadcoin is also resistant to consensus attacks such as a 51% attack. 51% attacks can occur when an entity controls over 50% of the network's hashrate, which would allow the controller to exclude transactions from the blockchain and reverse transactions created while they maintain control over the network. In Myriadcoin, the possibility for this is reduced as a user would need to control over 50% of the hashing power across multiple algorithms. [[5]]
-
-
-
-## "Universal" Difficulty Algorithm 
-
-```
-T = target solvetime
-n = number of blocks in averaging
-r = a dilution aka tempering aka buffering factor
-w = a weighting function based on n. It's 1 for all but LWMA. In LWMA it increases from 1 to n from oldest to more recent blocks, giving them more weight.
-
-target = avg(n targets) / r * [(r-1) + sum(n  w*STs)/sum(n w's) / T] 
-
-Less accurately:
-difficulty = avg(n Ds) * r / [ (r-1) + sum(n  w*STs)/sum(n w's) / T  ]
- 
-For clarity, here it is w=1 (no increased weight given to more recent blocks like LWMA and OSS)
-
-target = avg(n targets) / r * [(r-1) + avg(n STs) / T] 
-
-w=1, r=1  Dark Gravity Wave (a Simple Moving Average in deep disguise)
-w=1, n=1 for EMA. Larger r means smoother, slower response.
-w=1,  r=4 for Digishield, r=2 for Grin
-r=1, w = function of n.   LWMA
-r = 4, and simple w function.  OSS (like a combination of LWMA and Digishield)
-```
-
-https://github.com/zawy12/difficulty-algorithms/issues/41
+This design structure was chosen to make Myriadcoin resistant to ASIC specialization and centralization as the hardware requirements for the algorithms are different. Myriadcoin is also resistant to consensus attacks such as a 51% attack. 51% attacks can occur when an entity controls over 50% of the network's hashrate, which would allow the controller to exclude transactions from the blockchain and reverse transactions created while they maintain control over the network. In Myriadcoin, the possibility for this is reduced as a user would need to control over 50% of the hashing power across multiple algorithms. [[7]]
 
 ## Bitcoin Algorithms 
 
 ### Bitcoin Difficulty Algorithm
 
-The bitcoin network has a global block difficulty. Valid block must have a hash below this target. Mining pools also have a pool-specific share difficulty setting a lower linit for shares. [[6]][[7]]
+The bitcoin network has a global block difficulty. Valid block must have a hash below this target. Mining pools also have a pool-specific share difficulty setting a lower linit for shares. [[9]],[[10]]
 
 Difficulty changes every 2016 blocks. This is calculated using the following formula:
 
 $$
-difficulty = \frac{difficulty_1_target}{current_target}
+difficulty = \frac{difficulty1target}{currenttarget}
 $$
 
 Where the target is a 256-bit number 
@@ -291,7 +253,7 @@ Difficulty is changed every 2016 blocks based not the time it took to discover 2
 Average time of finding a single block can be calculated using this formula
 
 $$
-Time = difficulty x 2 x 32/ hashrate
+Time = \frac{difficulty x 2 x 32}{hashrate}
 $$
 
 Where 'difficulty' is the current cryptocurrency difficulty level of BTC difficulty network and 'hashrate' is the amount of hashes a miner finds per second. 
@@ -317,6 +279,32 @@ difficulty*120/secondsforblock
 $$
 
 (120 here is hard coded value, estimated time for single block)
+
+## "Universal" Difficulty Algorithm 
+
+```
+T = target solvetime
+n = number of blocks in averaging
+r = a dilution aka tempering aka buffering factor
+w = a weighting function based on n. It's 1 for all but LWMA. In LWMA it increases from 1 to n from oldest to more recent blocks, giving them more weight.
+
+target = avg(n targets) / r * [(r-1) + sum(n  w*STs)/sum(n w's) / T] 
+
+Less accurately:
+difficulty = avg(n Ds) * r / [ (r-1) + sum(n  w*STs)/sum(n w's) / T  ]
+ 
+For clarity, here it is w=1 (no increased weight given to more recent blocks like LWMA and OSS)
+
+target = avg(n targets) / r * [(r-1) + avg(n STs) / T] 
+
+w=1, r=1  Dark Gravity Wave (a Simple Moving Average in deep disguise)
+w=1, n=1 for EMA. Larger r means smoother, slower response.
+w=1,  r=4 for Digishield, r=2 for Grin
+r=1, w = function of n.   LWMA
+r = 4, and simple w function.  OSS (like a combination of LWMA and Digishield)
+```
+
+[[11]] 
 
 ### Monero Blocktime Algorithm
 
@@ -394,43 +382,78 @@ These simulations will pave the way for secondary study which would encompass ad
 Available: <https://coinsutra.com/hash-rate-or-hash-power/>. Date accessed: 2019&#8209;11&#8209;15.
 
 [1]: https://coinsutra.com/hash-rate-or-hash-power/
+
 "Explaining Hash Rash"
 
 [[2]] "Bitcoin Forum- Question about Mining Pool Difficulty" [online].
 Available: <https://bitcointalk.org/index.php?topic=5137845.0>. Date accessed: 2019&#8209;11&#8209;15.
 
 [2]:https://bitcointalk.org/index.php?topic=5137845.0
+
 "Bitcoin Forum- Question about Mining Pool Difficulty"
 
-[[3]] "Crypto51" [online].
-Available: <https://www.crypto51.app/about.html>. Date accessed: 2019&#8209;11&#8209;15.
+[[3]] "What is Cryptocurrency Game Theory: A Basic Introduction" [online].
+Available: <https://blockgeeks.com/guides/cryptocurrency-game-theory/>. Date accessed: 2019&#8209;11&#8209;18.
 
-[3]: https://www.crypto51.app/about.html
+[3]: https://blockgeeks.com/guides/cryptocurrency-game-theory/
+
+"What is Cryptocurrency Game Theory"
+
+[[4]] "Crypto51" [online].
+Available: <https://www.crypto51.app/about.html>. Date accessed: 2019&#8209;11&#8209;1.
+
+[4]: https://www.crypto51.app/about.html
+
 "Crypto51"
 
-[[4]] "Bitcoin Mining Centralization is 'Quite Alarming', But A Solution is in the Works" [online].
+[[5]] "NiceHash Wikipedia" [online].
+Available: <https://en.wikipedia.org/wiki/NiceHash>. Date accessed: 2019&#8209;11&#8209;18.
+
+[5]: https://en.wikipedia.org/wiki/NiceHash
+
+"NiceHash"
+
+[[6]] "Selfish Mining" [online].
+Available: <https://www.investopedia.com/terms/s/selfish-mining.asp>. Date accessed: 2019&#8209;11&#8209;18.
+
+[6]: https://www.investopedia.com/terms/s/selfish-mining.asp
+
+"Selfish Mining"
+
+[[7]] "Bitcoin Mining Centralization is 'Quite Alarming', But A Solution is in the Works" [online].
 Available: <https://www.forbes.com/sites/ktorpey/2019/07/28/bitcoin-mining-centralization-is-quite-alarming-but-a-solution-is-in-the-works/#49b8e6dd530b>. Date accessed: 2019&#8209;11&#8209;15.
 
-[4]: https://www.forbes.com/sites/ktorpey/2019/07/28/bitcoin-mining-centralization-is-quite-alarming-but-a-solution-is-in-the-works/#49b8e6dd530b
+[7]: https://www.forbes.com/sites/ktorpey/2019/07/28/bitcoin-mining-centralization-is-quite-alarming-but-a-solution-is-in-the-works/#49b8e6dd530b
+
 "Bitcoin Mining"
 
-[[5]] "MyriadCoin Wikipedia" [online].
+[[8]] "MyriadCoin Wikipedia" [online].
 Available: <https://en.bitcoinwiki.org/wiki/MyriadCoin>. Date accessed: 2019&#8209;11&#8209;13.
 
-[5]: https://en.bitcoinwiki.org/wiki/MyriadCoin
+[8]: https://en.bitcoinwiki.org/wiki/MyriadCoin
+
 "MyriadCoin Wiki"
 
-[[6]] "Difficulty Wikipedia" [online].
+[[9]] "Difficulty Wikipedia" [online].
 Available: <https://en.bitcoin.it/wiki/Difficulty>. Date accessed: 2019&#8209;11&#8209;13.
 
-[6]: https://en.bitcoin.it/wiki/Difficulty
+[9]: https://en.bitcoin.it/wiki/Difficulty
+
 "Difficulty Wiki"
 
-[[7]] "Difficulty in Mining Wikipedia" [online].
+[[10]] "Difficulty in Mining Wikipedia" [online].
 Available: <https://en.bitcoinwiki.org/wiki/Difficulty_in_Mining>. Date accessed: 2019&#8209;11&#8209;15.
 
-[7]:https://en.bitcoinwiki.org/wiki/Difficulty_in_Mining
+[10]: https://en.bitcoinwiki.org/wiki/Difficulty_in_Mining
+
 "Difficulty in Mining Wiki"
+
+[[10]] "'Universal' Difficulty Algorithm" [online].
+Available: <https://github.com/zawy12/difficulty-algorithms/issues/41>. Date accessed: 2019&#8209;11&#8209;18.
+
+[10]: https://github.com/zawy12/difficulty-algorithms/issues/41
+
+"'Universal' Difficulty Algorithm"
 
 
 
