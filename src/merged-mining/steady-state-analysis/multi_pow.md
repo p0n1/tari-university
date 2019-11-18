@@ -4,8 +4,8 @@
 - [Introduction](#introduction)
 	- [Question](#question)
 		- [Definition of Control](#definition-of-control)
-    	- [Hashrate](#hashrate) 
-    		- [Mining Pool Difficulty](#mining-pool-difficulty) 	
+		- [Hashrate](#hashrate) 
+    	- [Mining Pool Difficulty](#mining-pool-difficulty) 	
     - [Game Theory](#game-theory)
 - [Attack Vectors](#attack-vectors)
 	- [51% attack](#51%-attack)
@@ -123,6 +123,32 @@ Myriadcoin was created to address the issues surrounding the proof-of-work syste
 - Yescrypt for GPU and CPU miners
 
 This design structure was chosen to make Myriadcoin resistant to ASIC specialization and centralization as the hardware requirements for the algorithms are different. Myriadcoin is also resistant to consensus attacks such as a 51% attack. 51% attacks can occur when an entity controls over 50% of the network's hashrate, which would allow the controller to exclude transactions from the blockchain and reverse transactions created while they maintain control over the network. In Myriadcoin, the possibility for this is reduced as a user would need to control over 50% of the hashing power across multiple algorithms. [[5]]
+
+
+
+## "Universal" Difficulty Algorithm 
+
+```
+T = target solvetime
+n = number of blocks in averaging
+r = a dilution aka tempering aka buffering factor
+w = a weighting function based on n. It's 1 for all but LWMA. In LWMA it increases from 1 to n from oldest to more recent blocks, giving them more weight.
+
+target = avg(n targets) / r * [(r-1) + sum(n  w*STs)/sum(n w's) / T] 
+
+Less accurately:
+difficulty = avg(n Ds) * r / [ (r-1) + sum(n  w*STs)/sum(n w's) / T  ]
+ 
+For clarity, here it is w=1 (no increased weight given to more recent blocks like LWMA and OSS)
+
+target = avg(n targets) / r * [(r-1) + avg(n STs) / T] 
+
+w=1, r=1  Dark Gravity Wave (a Simple Moving Average in deep disguise)
+w=1, n=1 for EMA. Larger r means smoother, slower response.
+w=1,  r=4 for Digishield, r=2 for Grin
+r=1, w = function of n.   LWMA
+r = 4, and simple w function.  OSS (like a combination of LWMA and Digishield)
+```
 
 ## Bitcoin Algorithms 
 
