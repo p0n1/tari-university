@@ -240,9 +240,9 @@ The taget is a 256-bit number that all Bitcoin clients chare. TheSHA_256 hash of
 
 Block generation is not a long, set problem, instead it is similar to a lottery. Each hash results in a random number in the range of 0 to 256-bit. If the hash is below the target, then the block has been won, if not, the nonce is incremented and the guessing process continues. 
 
-For reasons of stability and low latency in transactions, the network tries to produce one block every 10 minutes. Every 2016 blocks, every Bitcoin client ompares the actual time it took to generate these blocks with the two week goal and modifies the target by percentage difference. This makes the proof-of-work problem more or less difficult. 
+For reasons of stability and low latency in transactions, the network tries to produce one block every 10 minutes. Every 2016 blocks, every Bitcoin client ompares the actual time it took to generate these blocks with the two week goal and modifies the target by percentage difference. This makes the proof-of-work problem more or less difficult. A single retarget never changes the target by more than a factor of 4 either way to prevent large changes in difficulty. [[9]] https://en.bitcoin.it/wiki/Target
 
-The bitcoin network has a global block difficulty. Valid block must have a hash below this target. Mining pools also have a pool-specific share difficulty setting a lower linit for shares. [[9]],[[10]]
+The bitcoin network has a global block difficulty. Valid block must have a hash below this target. Mining pools also have a pool-specific share difficulty setting a lower linit for shares. [[10]],[[11]]
 
 Difficulty changes every 2016 blocks. This is calculated using the following formula:
 
@@ -320,7 +320,7 @@ r=1, w = function of n.   LWMA
 r = 4, and simple w function.  OSS (like a combination of LWMA and Digishield)
 ```
 
-[[11]] 
+[[12]] 
 
 ## Hypothesis
 
@@ -397,11 +397,11 @@ A timestamp is accepted as valid if it is greater than the median timestamp of p
 
 Whenever a node connects to another node, it gets a UTC timestamp from it, and stores its offset from node-local UTC. The network-adjusted time is then the node-local UTC plus the median offset from all connected nodes. Network time is never adjusted more than 70 minutes from local system time, however.
 
-Bitcoin uses an unsigned integer for the timestamp, so the year 2038 problem is delayed for another 68 years. [[11]]
+Bitcoin uses an unsigned integer for the timestamp, so the year 2038 problem is delayed for another 68 years. [[12]]
 
 Synchronizing time across machines is difficult due to clock drift and network latencies. The timestamp of a block in Monero is specified by the miner, and the nodes only enforce that the timestamp of a new block is greater than the median of the last 60 blocks. If the nodes used their local clock to enforce timestamp, there would be some risk of disagreement of the validity of the newest block, and therefore a potential chain fork could result. Searching anything related to Bitcoin would be of use too, because identical issues with time are present on that system.
 
-A system could require that the timestamps strictly increase or remain equal, but that could force a miner to put a timestamp that they viewed as incorrect in subsequent blocks. [[12]]
+A system could require that the timestamps strictly increase or remain equal, but that could force a miner to put a timestamp that they viewed as incorrect in subsequent blocks. [[13]]
 
 ## References 
 
@@ -461,42 +461,45 @@ Available: <https://en.bitcoinwiki.org/wiki/MyriadCoin>. Date accessed: 2019&#82
 
 "MyriadCoin Wiki"
 
-[[9]] "Difficulty Wikipedia" [online].
+[[9]] "Target" [online].
+Available: <https://en.bitcoin.it/wiki/Target>. Date accessed: 2019&#8209;11&#8209;19.
+
+[9]: https://en.bitcoin.it/wiki/Target
+
+"Target"
+
+[[10]] "Difficulty Wikipedia" [online].
 Available: <https://en.bitcoin.it/wiki/Difficulty>. Date accessed: 2019&#8209;11&#8209;13.
 
-[9]: https://en.bitcoin.it/wiki/Difficulty
+[10]: https://en.bitcoin.it/wiki/Difficulty
 
 "Difficulty Wiki"
 
-[[10]] "Difficulty in Mining Wikipedia" [online].
+[[11]] "Difficulty in Mining Wikipedia" [online].
 Available: <https://en.bitcoinwiki.org/wiki/Difficulty_in_Mining>. Date accessed: 2019&#8209;11&#8209;15.
 
-[10]: https://en.bitcoinwiki.org/wiki/Difficulty_in_Mining
+[11]: https://en.bitcoinwiki.org/wiki/Difficulty_in_Mining
 
 "Difficulty in Mining Wiki"
 
-[[10]] "'Universal' Difficulty Algorithm" [online].
+[[12]] "'Universal' Difficulty Algorithm" [online].
 Available: <https://github.com/zawy12/difficulty-algorithms/issues/41>. Date accessed: 2019&#8209;11&#8209;18.
 
-[10]: https://github.com/zawy12/difficulty-algorithms/issues/41
+[12]: https://github.com/zawy12/difficulty-algorithms/issues/41
 
 "'Universal' Difficulty Algorithm"
 
-[10]: https://en.bitcoinwiki.org/wiki/Difficulty_in_Mining
-
-"Difficulty in Mining Wiki"
-
-[[11]] "'Block timestamp" [online].
+[[12]] "'Block timestamp" [online].
 Available: https://en.bitcoin.it/wiki/Block_timestamp. Date accessed: 2019&#8209;11&#8209;18.
 
-[11]: https://en.bitcoin.it/wiki/Block_timestamp
+[12]: https://en.bitcoin.it/wiki/Block_timestamp
 
 "Timestamp Question"
 
-[[12]] "'Block timestamp" [online].
+[[13]] "'Block timestamp" [online].
 Available: https://monero.stackexchange.com/questions/3300/timestamp-question. Date accessed: 2019&#8209;11&#8209;18.
 
-[12]: https://monero.stackexchange.com/questions/3300/timestamp-question
+[13]: https://monero.stackexchange.com/questions/3300/timestamp-question
 
 "Timestamp Question"
 
