@@ -234,6 +234,14 @@ This design structure was chosen to make Myriadcoin resistant to ASIC specializa
 
 ### Bitcoin Difficulty Algorithm
 
+#### Target 
+
+The taget is a 256-bit number that all Bitcoin clients chare. TheSHA_256 hash of a cblock's header must be lower than or equal to the current target for the block to be accepted by the network. The lower the target, the more difficult it is to generate a block. 
+
+Block generation is not a long, set problem, instead it is similar to a lottery. Each hash results in a random number in the range of 0 to 256-bit. If the hash is below the target, then the block has been won, if not, the nonce is incremented and the guessing process continues. 
+
+For reasons of stability and low latency in transactions, the network tries to produce one block every 10 minutes. Every 2016 blocks, every Bitcoin client ompares the actual time it took to generate these blocks with the two week goal and modifies the target by percentage difference. This makes the proof-of-work problem more or less difficult. 
+
 The bitcoin network has a global block difficulty. Valid block must have a hash below this target. Mining pools also have a pool-specific share difficulty setting a lower linit for shares. [[9]],[[10]]
 
 Difficulty changes every 2016 blocks. This is calculated using the following formula:
@@ -247,6 +255,12 @@ Where the target is a 256-bit number
 difficulty_1_target can take various values. Traditionally it's a hash function first 32 bits of which are equal to 0 while all the rest are 1 (it is also called diff or pool difficulty). Bitcoin protocol provides target as a type with floating point and limited accuracy. Different Bitcoin clients often determine cryptocurrency difficulty based on this data. 
 
 Difficulty is changed every 2016 blocks based not the time it took to discover 2016 previous blocks will take exactly 2 weeks. If previous 2016 blocks were found in more than two weeks the cryptocurrency mining will be lowered, and if they were mined faster than that it will be raised. The more (or less) time was spent on finding the previous 2016 blocks the more will difficulty be lowered (raised) 
+
+Each block stores a packed representation, termed Bits, of its actual hexadecimal target. 
+
+![Bitcoin mining difficulty chart](https://en.bitcoinwiki.org/upload/en/images/thumb/f/f0/Difficulty.jpg/500px-Difficulty.jpg)
+
+The image above highlights the Bitcoin mining in relation to its price. 
 
 ### Bitcoin Blocktime Algorithm
 
