@@ -45,12 +45,11 @@ The aim of this report is to provide an analysis of simulations built that calcu
 
 #### Definition of Control 
 
-When we use the word 'control' what is actual meant is the chance of mining $n$ number of blocks in a row to a certain threshold. What is the threshold?
-In answering the question, what is $n$, when considering reorgs, they go passed the coinbase transaction, that is a good limit. 
+The use of the word 'control' encompasses the question 'what is the chance of mining $n$ number of blocks in a row to a certain threshold'. 
 
-So to rephrase the question, what is the chance of mining $n$ blocks in a row? What is the probability of mining $n$ blocks in a row? Let $n$ = 20, 50, 100 
+So to rephrase the question, what is the probability of mining $n$ blocks in a row? Let $n$ = 20, 50, 100 
 
-A series of scenarios will be played out. Which scenario is more efficient? Which is cheaper- buying hashrate is easier?
+A series of scenarios have been considered, where multiple mining algorithms with varied hashraties and ease at which it takes to control the network discussed.    
 
 #### Hashrate
 
@@ -387,7 +386,6 @@ These simulations will pave the way for secondary study which would encompass ad
 - alpha trimmed mean 
 - linearly weighted moving average (LWMA)
 - moving median 
-- https://monero.stackexchange.com/questions/3300/timestamp-question
 
 ### Block timestamp
 
@@ -402,6 +400,25 @@ Bitcoin uses an unsigned integer for the timestamp, so the year 2038 problem is 
 Synchronizing time across machines is difficult due to clock drift and network latencies. The timestamp of a block in Monero is specified by the miner, and the nodes only enforce that the timestamp of a new block is greater than the median of the last 60 blocks. If the nodes used their local clock to enforce timestamp, there would be some risk of disagreement of the validity of the newest block, and therefore a potential chain fork could result. Searching anything related to Bitcoin would be of use too, because identical issues with time are present on that system.
 
 A system could require that the timestamps strictly increase or remain equal, but that could force a miner to put a timestamp that they viewed as incorrect in subsequent blocks. [[13]]
+
+
+
+## Notes from Zawy12
+
+What is N, T?
+
+N- the size of an average window in a difficulty algorithm (consodered more importantat than the algorithm- if the algorithm is at least as good as a simple moving average)
+
+Choosing N tries to achieve a balance between a fast response to price (and other causes of hash rate changes) and minimizing accidental variation that accidentally attracts or discourages hashrate with an incorrect difficulty. Smaller N gives faster response but higher variation. The speed at which the difficulty can keep up with price changes is proportional to N*T. The accidental variation in D in block time is proportional to 1/SQRT(N). Approximately, we want to minimize some function like this:
+
+`A/SQRT(N) + B*N*T`
+i.e.: variation + slowness
+
+A and B are some unknown scaling factors that relate the relative importance of 1/SQRT(N) and N*T.
+
+- The choice is between wanting a fast speed of response by lower N to keep up with network hashrate changes and not wanting random variation casued by lower B to encourage 
+
+
 
 ## References 
 
