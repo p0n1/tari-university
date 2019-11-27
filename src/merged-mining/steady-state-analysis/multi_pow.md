@@ -321,6 +321,21 @@ r = 4, and simple w function.  OSS (like a combination of LWMA and Digishield)
 
 [[12]] 
 
+
+
+**LWMA Description**
+This sets difficulty by estimating current hashrate by the most recent difficulties and solvetimes. It divides the average difficulty by the Linearly Weighted Moving Average (LWMA) of the solvetimes. This gives it more weight to the more recent solvetimes. It is designed for small coin protection against timestamp manipulation and hash attacks. The basic equation is: https://github.com/zawy12/difficulty-algorithms/issues/3
+
+```
+next_difficulty = average(Difficulties) * target_solvetime / LWMA(solvetimes)
+```
+
+
+
+## Tari Algorithm 
+
+
+
 ## Hypothesis
 
 Scenario 5 best, better than 2 last 3 
@@ -333,6 +348,20 @@ Scenario 5 best, better than 2 last 3
 - Hashrate is constant --> Difficulty is constant 
 
 ## Implementation
+
+This simulation takes a snapshot of at each second. 
+
+
+
+N = 150 blocks (Simulation 150 blocks)
+
+All blocks solved at 1 minute 
+
+t= 60s 
+
+- want to see effect of jumping between hashrate
+
+
 
 Monte Carlo Simulation 
 
