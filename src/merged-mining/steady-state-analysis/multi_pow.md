@@ -173,7 +173,7 @@ Buyers select the crypto-currency that they want to mine, a pool on which they w
 
 Selfish mining is a strategy for mining bitcoin in which groups of miners collude to increase their revenue. Bitcoin was invented to decentralise production and distribution of money. But selfish mining can result in centralization of bitcoin mining operations. 
 
-Selfish minig was first proposed by Cornell researchers Sirer and Eyal in 2013. They proved that miners can earn more bitcoins by hiding newly-generated blocks from the main blockchain and creating a separate fork. 
+Selfish mining was first proposed by Cornell researchers Sirer and Eyal in 2013. They proved that miners can earn more bitcoins by hiding newly-generated blocks from the main blockchain and creating a separate fork. 
 
 Bitcoin mining relies on miners who solve cryptographically complex puzzles to generate coins. Income from the activity varies because the process is dependent on several factors, from the difficulty of puzzles being solved to electricity costs to hte quality of Internet connections. The bitcoin protocol is configured to reward miners in proportion to their mining output. This ensures that even if miners organise themselves into large pools, the rewards are still dependent on coins produced by individual miners in teh public blockchain. 
 
