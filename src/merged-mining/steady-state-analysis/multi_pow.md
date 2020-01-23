@@ -403,6 +403,8 @@ $n$ hashes mining Tari, you need more --> argue the cost is zero
 | ------------- | ------------- | ------------- |
 | 33%           | 33%           | 33%           |
 
+## Work completed
+
 ## Conclusions and Remarks
 
 #### Future Work 
