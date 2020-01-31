@@ -71,85 +71,14 @@ Through a series of computations, miners find a block and add it to the blockcha
 
 To mitigate that, the blockchain uses game theory mechanics to keep the system bulletproof. In order to understand how game theory keeps the miners honest, let’s take a look at another peer-to-peer system which has allowed its users to, time and again, get away with cheating.
 
-Torrenting is one most popular peer to peer systems in the world. While using torrents, users have two roles: downloading and seeding. After downloading a file, they are supposed to share it the network via a method called seeding. However, they get no compensation for seeding the said file and hence more often than not they refuse to do so. Most torrent users are “cheats” because they do not seed their files. They can get away with cheating because the system doesn’t have a “punishment model” the way blockchain does.
+Torrenting is one most popular peer to peer systems in the world. While using torrents, users have two roles: downloading and seeding. After downloading a file, they are supposed to share it the network via a method called seeding. However, they get no compensation for seeding the said file and hence more often than not they refuse to do so. Most torrent users are “cheats” because they do not seed their files. They can get away with cheating because the system doesn’t have a “punishment model” the way blockchain does.  [[3]]
 
-How can miners cheat?
+**How can miners cheat?**
 
 - They can include an invalid transaction and give themselves extra coins.
 - Add blocks randomly without worrying about Proof of work
 - Mine on top of invalid blocks to get more BTC.
 - Mine on top of a sub-optimally scoring block.
-
-**Consider the block below:**
-
-![What is Cryptocurrency Game Theory: A Basic introduction](https://blockgeeks.com/wp-content/uploads/2017/08/What-is-Cryptocurrency-Game-Theory-A-Basic-introduction-12-e1502212222697.png)
-
-The blocks in blue are the main chain. Now suppose there is a miner who, in blue block 51, spends 20 bitcoins to get 500 litecoins (hypothetically). And now he wants to create a parallel chain with a new block 51 (red), where in he never did this transaction. So, to simplify what he just did, let’s do a quick recap:
-
-- In blue block 51 spends 20 bitcoins to get 500 litecoins.
-- Creates a new chain (fork) from block 50 and in the alternate block 51, he doesn’t do the litecoin transaction.
-- In the end, he comes out with his original 20 BTC and 500 new litecoins.
-
-What just happened here is called “double spending.” Obviously now miners can, theoretically, mine on top of the new red chain and keep double spending and mining extra bitcoins. As you can imagine, this can destroy the bitcoin system.
-
-So why don’t miners do that? Is it because they are all good and honorable people? You can’t make a system based on the morals of a person, morality is not quantifiable after all. This is where the true genius of blockchain comes in. The blockchain was designed in a way that it is a self-enforcing Nash Equilibrium. The reason why that happens is that mining has a recursive punishment system.
-
-**The Nash Equilibrium in mining and the punishment system.**
-
-- If a miner creates an invalid block then others won’t mine on top of it because of a rule that has been defined in blockchain mechanics. Any block that is mined on top of an invalid block becomes an invalid block. Using this rule, miners will simply ignore the invalid block and keep on mining on top of the main chain aka the blue chain in the diagram.
-- This similar logic stands for sub-optimally scoring block. Look at the diagram again. No miner will want to mine on Red Block 52 because the Blue Block 53 will have a higher score than the red block.
-
-Both of these scenarios get mitigated because miners., as a group will choose the most stable state aka the state with a Nash Equilibrium. Obviously, you can make all the miners mine on the red block and make it the new blockchain, however, the number of miners is so vast that an event like that simply cannot be coordinated (we will talk about this in a bit). As the co-ordination game states, if a majority of the people in the group are not changing their state, the minority will not have any incentive to stay in the new state. Seeing this, why will a miner spend all their computation power and risk ostracization in a futile cause?
-
-**Why will users use the main chain instead of the other chain?**
-
-So, now that we have seen the reason WHY miners will prefer the blue chain…What about the users? In the blockchain game, there are two players, miners, and users. Why will users prefer the blue chain over the red chain? Once again, game theory mechanics come into play.
-
-- The first thing that you need to keep in mind is that cryptocurrency has value is because the people give it value. So, why will a normal user assign a value to coins coming out of the blue chain and not to the coins coming out of the red chain? The reason is simple. The main chain is a Schelling point from the users perspective. They give it value because the main chain seems natural and special to them.
-- Bounded Rationality: Another reason why users will value the main chain more is that they are simply used to it. Like bounded rationality states, people will simply opt for the simplest solution every time. Moving through a newer chain needlessly complicates things.
-
-###### What is the Proof Of Work Takeover Problem?
-
-Before we start explaining this, let’s bring back our old diagram again for reference:
-
-![What is Cryptocurrency Game Theory: A Basic introduction](https://blockgeeks.com/wp-content/uploads/2017/08/What-is-Cryptocurrency-Game-Theory-A-Basic-introduction-12-e1502212222697.png)
-
-Vitalik Buterin gave a great example of the Takeover problem and we are going to expand on it. Suppose, someone makes a hypothetical smart contract for an activity. The terms of the contract go like this:
-
-- Any miner can join the activity by sending a very large deposit into the contract.
-- The miners must send shares of the partially completed blocks that they have mined into the contract and the contract verifies it and also verifies that you are a miner and that you have sufficient hash power.
-- Before 60% of the miners in the system join you can leave anytime you want.
-- After 60% of the miners join, you will be bound to the contract until the 20 blocks have been added to the hard fork chain aka the red chain.
-
-Yes, it is indeed very diabolical and you can see the problem that this attack can have. Not only will the new chain grow bigger and longer, since 60% of the entire miners are bound contractually to this new chain this will quickly make the original older chain aka the blue chain irrelevant. This will make double spends all over the place and the value of the currency will fall fast.
-
-Now, you might be asking why miners will join in a takeover?
-
-**Well, let’s see their incentive for joining:**
-
-- The possible reward at the end.
-- No risk of joining on their part.
-
-**What is their incentive to follow through with the contract?**
-
-- The huge amount they have deposited in the beginning.
-- Once again, the possibility of a great reward.
-
-Theoretically, a takeover like this can end any currency, but this is not that likely to happen because of…You guessed it…. game theory mechanics.
-
-###### Grim Trigger argument to the rescue!
-
-Think of our king argument when we first talked about grim triggers. If a king is killed and usurped, what will stop the new king from getting killed and from this becoming an endless bloody cycle? To stop this from happening, the best course of action is to not kill the original king in the first place.
-
-Similarly, let’s use this logic for blockchains. If a blockchain is taken over and destroyed and the miners are diverted into a new chain, what is stopping that new chain from being taken over by the majority anytime soon? To stop these endless hardforks (aka the red chains in the diagram) from happening, it is important that we don’t do the takeover in the first place.
-
-**However, there are certain places where the Grim Trigger argument does fail, and obviously, there are places where it works pretty spectacularly:**
-
-- The argument fails when the miners are not bound to singular currency. If the miners are working on several currencies, then they can simply group to take over a low-value currency.
-- The argument holds up if they are bound and loyal to a particular currency. After all, it is in their direct interest to uphold and maintain the value and legitimacy of the currency.
-- If the currency requires specialized ASICs, then the grim trigger argument holds up. If a currency can only be mined by specialized software, then miners will make sure that nothing happens to that particular currency and that it doesn’t lose value. Specialized ASICs after all, can only work for a particular currency. Otherwise, it is useless. Plus, they are expensive.
-- The argument doesn’t hold up if the currency can be mined using CPUs. CPUs are not expensive after all, and it can be used to mine other currencies.
-- However, if the miners who own the CPUs have a stake in the currency, the argument holds up because they don’t want to lose the stake that they have invested in the currency. This is a sort of proof-of-stake. [[3]]
 
 ## Attack Vectors 
 
@@ -187,9 +116,10 @@ In the meanwhile, the public blockchain continues mining new blocks. The process
 
 ## Calculating the Cost of an Attack 
 
-Using the prices NiceHash lists for different algorithms we are able to calculate how much it would cost to rent enough hashing power to match the current network hashing power for an hour. Nicehash does not have enough hashing power for most larger coins, so we also calculated what percentage of the needed hashing power is available from Nicehash.
+- Normalise cost across all competing algorithms. 
 
-Note that the attack cost does not include the block rewards that the miner will receive for mining. In some cases this can be quite significant, and reduce the attack cost by up to 80%. [[4]]
+- Cost associated with each alogrithm will be the same due to free market forces e.g. if infrastructures  for competing algorithms was independently owned, then market forces would equalise the cost to maximise profits 
+- Etc. 
 
 ## Mining Centralization 
 
@@ -213,11 +143,11 @@ Myriadcoin is the first coin to implement five different proof-of-work hashing a
 
 Each algoritm aims for a block generation time of 2.5 minutes. Any existing CPU, Gpu and ASIC miners can be used to mine Myriadcoin. Over the five algorithms, a block should be found on average every 30 seconds. 
 
-Difficult is adjusted after every block. 
+- Difficult is adjusted after every block. 
 
-Correct implemntation of Mulit-Algo leads to higher secuirty and prevents centralisation of mining power. 
+- Correct implemntation of Mulit-Algo leads to higher secuirty and prevents centralisation of mining power. 
 
-A single algo can only mine six consecutive blocks. 
+- A single algo can only mine six consecutive blocks. 
 
 The process of searching for blocks that meet this proof-of-work threshold is called mining, and the incentives for doing it arise from teh block reward and transaction fees that users wishing to send coins can pay. Miners searching for valid blocks compete with each other on the network. As a consequence, the speed at which a miner can search for outputs from the proof-of-work function will influence the amount of blocks they generate and allow them to collect more rewards. When cryptocurrencies were first developed, the first blocks were generated by programs that use a computer's CPU to do the proof-of-work calculation. It was quickly realised that the properties of the proof-of-work algorithm used could be used to search for valid blocks on Graphics Processing Units (GPUs) by exploiting parellelisation, and that ultimately Application specific integrated circuits (ASICs) could be created to search for blocks. At each stage, the efficiency brought by the new methods rendered old methods obsolete and unable to compete economically, resulting in a centralisation of mining, especially in regions where power (the principle operating expense) is cheaply available.
 
@@ -239,7 +169,7 @@ The taget is a 256-bit number that all Bitcoin clients chare. TheSHA_256 hash of
 
 Block generation is not a long, set problem, instead it is similar to a lottery. Each hash results in a random number in the range of 0 to 256-bit. If the hash is below the target, then the block has been won, if not, the nonce is incremented and the guessing process continues. 
 
-For reasons of stability and low latency in transactions, the network tries to produce one block every 10 minutes. Every 2016 blocks, every Bitcoin client ompares the actual time it took to generate these blocks with the two week goal and modifies the target by percentage difference. This makes the proof-of-work problem more or less difficult. A single retarget never changes the target by more than a factor of 4 either way to prevent large changes in difficulty. [[9]] https://en.bitcoin.it/wiki/Target
+For reasons of stability and low latency in transactions, the network tries to produce one block every 10 minutes. Every 2016 blocks, every Bitcoin client ompares the actual time it took to generate these blocks with the two week goal and modifies the target by percentage difference. This makes the proof-of-work problem more or less difficult. A single retarget never changes the target by more than a factor of 4 either way to prevent large changes in difficulty. [[9]] 
 
 The bitcoin network has a global block difficulty. Valid block must have a hash below this target. Mining pools also have a pool-specific share difficulty setting a lower linit for shares. [[10]],[[11]]
 
@@ -324,17 +254,11 @@ r = 4, and simple w function.  OSS (like a combination of LWMA and Digishield)
 
 
 **LWMA Description**
-This sets difficulty by estimating current hashrate by the most recent difficulties and solvetimes. It divides the average difficulty by the Linearly Weighted Moving Average (LWMA) of the solvetimes. This gives it more weight to the more recent solvetimes. It is designed for small coin protection against timestamp manipulation and hash attacks. The basic equation is: https://github.com/zawy12/difficulty-algorithms/issues/3
+This sets difficulty by estimating current hashrate by the most recent difficulties and solvetimes. It divides the average difficulty by the Linearly Weighted Moving Average (LWMA) of the solvetimes. This gives it more weight to the more recent solvetimes. It is designed for small coin protection against timestamp manipulation and hash attacks. The basic equation is:
 
 ```
 next_difficulty = average(Difficulties) * target_solvetime / LWMA(solvetimes)
 ```
-
-
-
-## Tari Algorithm 
-
-
 
 ## Hypothesis
 
@@ -347,27 +271,15 @@ Scenario 5 best, better than 2 last 3
 - Define cost that is agnostic of hashrate 
 - Hashrate is constant --> Difficulty is constant 
 
-## Implementation
+## Analysis
 
-This simulation takes a snapshot of at each second. 
+- Selfish mining with increased hash rate
 
+- Evaluate controlling from 51% and beyond
 
-
-N = 150 blocks (Simulation 150 blocks)
-
-All blocks solved at 1 minute 
-
-t= 60s 
-
-- want to see effect of jumping between hashrate
-
-
-
-Monte Carlo Simulation 
-
-$n/1000000 = p$
-
-5? random generator to simulate PoW (allocate hashrate)
+- How successful can you be with selflish mining?
+- There will be a comparison of different difficuly algos e.g LWMA and their controlling parameters 
+- How much of the total mining cost would you need to attack the network?
 
 ### Scenario 1 
 
@@ -377,9 +289,9 @@ $n$ hashes mining Tari, you need more --> argue the cost is zero
 
 ### Scenario 2 
 
-| Merged Mining | Proof of Work |
-| ------------- | ------------- |
-| 50%           | 50%           |
+| 1    | 2    |
+| ---- | ---- |
+| 50%  | 50%  |
 
 - How much of the PoW hashrate do you need to buy control to make above statement true 
 
@@ -403,8 +315,6 @@ $n$ hashes mining Tari, you need more --> argue the cost is zero
 | ------------- | ------------- | ------------- |
 | 33%           | 33%           | 33%           |
 
-## Work completed
-
 ## Conclusions and Remarks
 
 #### Future Work 
@@ -418,7 +328,11 @@ These simulations will pave the way for secondary study which would encompass ad
 - linearly weighted moving average (LWMA)
 - moving median 
 
-### Block timestamp
+### ***Block timestamp
+
+*To Do: The large difficulty window attempts to solve this problem*
+
+*To Do: Compare difficulty window between blockchains*
 
 Each block contains a Unix time timestamp. In addition to serving as a source of variation for the block hash, they also make it more difficult for an adversary to manipulate the block chain.
 
@@ -431,23 +345,6 @@ Bitcoin uses an unsigned integer for the timestamp, so the year 2038 problem is 
 Synchronizing time across machines is difficult due to clock drift and network latencies. The timestamp of a block in Monero is specified by the miner, and the nodes only enforce that the timestamp of a new block is greater than the median of the last 60 blocks. If the nodes used their local clock to enforce timestamp, there would be some risk of disagreement of the validity of the newest block, and therefore a potential chain fork could result. Searching anything related to Bitcoin would be of use too, because identical issues with time are present on that system.
 
 A system could require that the timestamps strictly increase or remain equal, but that could force a miner to put a timestamp that they viewed as incorrect in subsequent blocks. [[13]]
-
-
-
-## Notes from Zawy12
-
-What is N, T?
-
-N- the size of an average window in a difficulty algorithm (consodered more importantat than the algorithm- if the algorithm is at least as good as a simple moving average)
-
-Choosing N tries to achieve a balance between a fast response to price (and other causes of hash rate changes) and minimizing accidental variation that accidentally attracts or discourages hashrate with an incorrect difficulty. Smaller N gives faster response but higher variation. The speed at which the difficulty can keep up with price changes is proportional to N*T. The accidental variation in D in block time is proportional to 1/SQRT(N). Approximately, we want to minimize some function like this:
-
-`A/SQRT(N) + B*N*T`
-i.e.: variation + slowness
-
-A and B are some unknown scaling factors that relate the relative importance of 1/SQRT(N) and N*T.
-
-- The choice is between wanting a fast speed of response by lower N to keep up with network hashrate changes and not wanting random variation casued by lower B to encourage 
 
 
 
@@ -555,4 +452,3 @@ Available: https://monero.stackexchange.com/questions/3300/timestamp-question. D
 
 ## Contributors
 
-- <https://github.com/kevoulee>
