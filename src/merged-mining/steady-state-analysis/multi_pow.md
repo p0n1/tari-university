@@ -55,6 +55,10 @@ A series of scenarios have been considered, where multiple mining algorithms wit
 
 Hash rate, similarly known as hash power, is the unit that measures how much power a cryptocurrency network using proof-of-work is consuming to be continuously functional, i.e. how much hash power it is consuming to generate blocks at the normal mean time. [[1]]
 
+***Honest Mining***
+
+In order to find the probability of mining x blocks in a row, the mining power is raised to x. 
+
 ##### Mining Pool Difficulty
 
 Each mining pool sets its own difficulty, which is lower than that of the network, to award the participants in accordance with the work they are doing. [[2]] But how does one know what the hashing power is of a particular machine?  It's by the diff of the submitted shares coupled with the time needed to generate said shares.  Higher diff/longer time is eqivalent to lower diff/shorter time.  Hashpower at the pool level is back calculated via diff of shares and time; for the whole Network it is based on solved blocks and time.
